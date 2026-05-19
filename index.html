@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corporate Finance Career Navigator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#home" aria-label="Corporate Finance Career Navigator home">
+      <span class="logo-mark">CF</span>
+      <span>Career Navigator</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation">Menu</button>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#roles">Roles</a>
+      <a href="#compare">Compare</a>
+      <a href="#future">Future</a>
+      <a href="#assessment-hub">Assessments</a>
+      <a href="#final-assessment">Best Fit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Offline corporate finance career platform</p>
+          <h1>Find the finance career that matches how you think, work and grow.</h1>
+          <p class="hero-lead">Explore 16 corporate finance pathways, understand the work behind the title, compare career options, and take dynamic assessments that guide you toward roles aligned with your strengths, values and ambition.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#roles">Explore roles</a>
+            <a class="btn ghost" href="#final-assessment">Take the final assessment</a>
+          </div>
+          <div class="hero-stats" aria-label="Website highlights">
+            <div><strong>16</strong><span>Career paths</span></div>
+            <div><strong>170+</strong><span>Assessment prompts</span></div>
+            <div><strong>80</strong><span>Case-study lenses</span></div>
+          </div>
+        </div>
+        <div class="hero-panel reveal">
+          <div class="dashboard-card main-kpi">
+            <span>Career signal</span>
+            <strong id="heroSignal">Strategic finance</strong>
+            <p>Financial analysis becomes powerful when it changes a business decision.</p>
+          </div>
+          <div class="orbit">
+            <span>FP&amp;A</span>
+            <span>IB</span>
+            <span>M&amp;A</span>
+            <span>Risk</span>
+            <span>CFO</span>
+          </div>
+          <div class="mini-chart" aria-hidden="true">
+            <i style="height:42%"></i><i style="height:68%"></i><i style="height:52%"></i><i style="height:84%"></i><i style="height:62%"></i><i style="height:92%"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brief">
+      <div class="section-head reveal">
+        <p class="eyebrow">Refined build brief</p>
+        <h2>From static guide to career discovery platform.</h2>
+        <p>The upgraded site is designed as an offline learning product for students, graduates and early-career professionals. It combines role education, case-based learning, future-of-finance thinking, dynamic assessments and practical preparation plans.</p>
+      </div>
+      <div class="brief-grid reveal">
+        <article>
+          <h3>Instructional direction</h3>
+          <p>Each role page teaches what the role does, why it matters, how work is organized, what skills are needed, who thrives, who may struggle, and how to prepare with portfolio projects.</p>
+        </article>
+        <article>
+          <h3>Career strategy direction</h3>
+          <p>The assessments test motivation, work style, quantitative appetite, ambiguity tolerance, detail orientation, stakeholder preference and future-readiness rather than simple interest.</p>
+        </article>
+        <article>
+          <h3>Technical direction</h3>
+          <p>The platform uses only HTML, CSS and JavaScript. It runs by opening <strong>index.html</strong> in a browser and does not need internet access, accounts, APIs or a server.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark" id="roles">
+      <div class="section-head reveal">
+        <p class="eyebrow">Career library</p>
+        <h2>Major corporate finance career paths.</h2>
+        <p>Start with the role cards, then open a detailed role page. Each page includes responsibilities, tools, skills, mini case studies, career path, future outlook, preparation guidance and a tailored assessment.</p>
+      </div>
+      <div class="filter-bar reveal">
+        <button class="chip active" type="button" data-filter="all">All roles</button>
+        <button class="chip" type="button" data-filter="planning">Planning</button>
+        <button class="chip" type="button" data-filter="transactions">Transactions</button>
+        <button class="chip" type="button" data-filter="markets">Markets</button>
+        <button class="chip" type="button" data-filter="control">Control</button>
+        <button class="chip" type="button" data-filter="strategy">Strategy</button>
+      </div>
+      <div id="roleCards" class="role-card-grid"></div>
+    </section>
+
+    <section class="section" id="role-detail">
+      <div class="role-empty reveal">
+        <p class="eyebrow">Detailed role page</p>
+        <h2>Choose any role to open its full career guide.</h2>
+        <p>The guide will appear here with responsibilities, skills, tools, case studies, career journey, future outlook and a role-specific assessment.</p>
+      </div>
+      <div id="rolePage" class="role-page hidden"></div>
+    </section>
+
+    <section class="section band" id="compare">
+      <div class="section-head reveal">
+        <p class="eyebrow">Interactive comparison</p>
+        <h2>Compare finance careers by work style.</h2>
+        <p>Select up to three roles to compare what the work feels like, how the role creates value, and what you should build to become competitive.</p>
+      </div>
+      <div class="compare-controls reveal">
+        <select id="compareA" aria-label="First role"></select>
+        <select id="compareB" aria-label="Second role"></select>
+        <select id="compareC" aria-label="Third role"></select>
+      </div>
+      <div id="comparisonTable" class="comparison-table reveal"></div>
+    </section>
+
+    <section class="section" id="future">
+      <div class="section-head reveal">
+        <p class="eyebrow">Future of finance</p>
+        <h2>What corporate finance could look like in 10 years.</h2>
+        <p>Automation will absorb repetitive reporting and reconciliation. The human premium will move toward judgment, narrative, business partnering, governance, ethical use of AI, scenario design and strategic capital allocation.</p>
+      </div>
+      <div class="future-grid reveal">
+        <article>
+          <span>Automated</span>
+          <h3>Routine production</h3>
+          <p>Standard variance packs, reconciliations, data cleansing, first-draft commentary, transaction screening and basic dashboarding will increasingly be AI-assisted.</p>
+        </article>
+        <article>
+          <span>Augmented</span>
+          <h3>Analysis and decision support</h3>
+          <p>Finance professionals will use AI copilots to test scenarios, identify anomalies, interrogate large datasets and prepare stronger narratives faster.</p>
+        </article>
+        <article>
+          <span>More valuable</span>
+          <h3>Human judgment</h3>
+          <p>Stakeholder trust, commercial courage, ethics, negotiation, risk judgment, strategic framing and clarity under uncertainty will become more important.</p>
+        </article>
+        <article>
+          <span>Learn now</span>
+          <h3>Digital finance toolkit</h3>
+          <p>Build Excel depth, Power BI, SQL basics, prompt design, modelling discipline, data storytelling, ESG fluency and the ability to explain assumptions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark" id="assessment-hub">
+      <div class="section-head reveal">
+        <p class="eyebrow">Assessment dashboard</p>
+        <h2>Role-specific career fit assessments.</h2>
+        <p>Each assessment randomly selects 10 questions from that role's question pool. Retake an assessment to see a different version and reflect on your patterns.</p>
+      </div>
+      <div id="assessmentDashboard" class="assessment-dashboard"></div>
+    </section>
+
+    <section class="section" id="final-assessment">
+      <div class="section-head reveal">
+        <p class="eyebrow">Consolidated career-fit assessment</p>
+        <h2>Find your strongest corporate finance match.</h2>
+        <p>This assessment compares multiple career paths using practical signals: motivation, analytical style, detail versus strategy preference, stakeholder energy, pressure tolerance, quantitative confidence and future-readiness.</p>
+      </div>
+      <div class="assessment-shell reveal">
+        <div class="assessment-top">
+          <div>
+            <h3>Best-fit career assessment</h3>
+            <p>Answer 10 randomly selected questions. Your result will show your top three roles, less-aligned roles, a 6-month learning plan, portfolio projects, certifications and an interview positioning statement.</p>
+          </div>
+          <button class="btn primary" type="button" id="startFinal">Start final assessment</button>
+        </div>
+        <div id="finalAssessment"></div>
+      </div>
+    </section>
+
+    <section class="section band" id="logic">
+      <div class="section-head reveal">
+        <p class="eyebrow">Assessment memo</p>
+        <h2>How the scoring works.</h2>
+        <p>Role assessments use weighted answers from 0 to 3. Higher-scoring answers indicate stronger alignment with the role's motivation, work style, technical appetite, pressure pattern and future skills. The consolidated assessment maps each answer to one or more finance roles, then ranks the strongest matches.</p>
+      </div>
+      <div class="logic-grid reveal">
+        <article><h3>Role-specific fit</h3><p>Questions test whether the user is energized by the actual work of the role. Results include suitability, strengths, development areas, projects, related roles and a 6-month plan.</p></article>
+        <article><h3>Dynamic question banks</h3><p>Every role has a larger pool than the 10 questions displayed. JavaScript shuffles the bank and selects a fresh set, creating many possible assessment versions offline.</p></article>
+        <article><h3>Career matching</h3><p>The final assessment compares roles against each other. It identifies top matches, weaker matches and practical next steps for internships, graduate roles or entry-level applications.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Corporate Finance Career Navigator. Built as a fully offline HTML, CSS and JavaScript learning platform.</p>
+  </footer>
+
+  <template id="questionTemplate">
+    <div class="question-card">
+      <div class="question-meta"></div>
+      <h4></h4>
+      <div class="answer-grid"></div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
