@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Commerce Career Navigator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <header class="site-header">
@@ -12,193 +12,238 @@
       <span class="brand-mark">CCN</span>
       <span>Commerce Career Navigator</span>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Open menu">Menu</button>
-    <nav class="nav" aria-label="Primary navigation">
+    <button class="menu-toggle" type="button" aria-label="Open navigation">Menu</button>
+    <nav class="site-nav" aria-label="Primary navigation">
       <a href="#streams">Streams</a>
       <a href="#roles">Roles</a>
-      <a href="#pivot">Pivot</a>
-      <a href="#stuck">I'm Stuck</a>
+      <a href="#compare">Compare</a>
+      <a href="#pivot">Career Pivot</a>
+      <a href="#assistance">I Need Assistance</a>
       <a href="#assessments">Assessments</a>
-      <a href="#future">Future</a>
     </nav>
   </header>
 
   <main>
-    <section id="home" class="hero">
+    <section id="home" class="hero section-block">
       <div class="hero-copy">
         <p class="eyebrow">South African-aware. Globally relevant. Future-focused.</p>
-        <h1>Build a commerce career direction you can actually act on.</h1>
-        <p class="lead">Explore finance, accounting, tax, economics, banking, development finance, consulting, analytics, entrepreneurship, governance and leadership pathways. Use guided assessments and pivot tools to discover realistic next steps.</p>
+        <h1>Let us help you find your ideal career.</h1>
+        <p class="hero-lead">A practical commerce career guidance platform for people interested in finance, accounting, taxation, economics, strategy, consulting, development finance, analytics, entrepreneurship and business leadership.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#assessments">Start Your Career Discovery</a>
-          <a class="btn ghost" href="#streams">Explore Career Streams</a>
-          <a class="btn ghost" href="#pivot">Pivot From My Current Career</a>
+          <a class="btn primary" href="#assessments">Start Career Discovery</a>
+          <a class="btn secondary-dark" href="#streams">Explore Career Streams</a>
+          <a class="btn secondary-dark" href="#pivot">Use Career Pivot Navigator</a>
         </div>
       </div>
-      <div class="hero-board" aria-label="Platform insight cards">
-        <article><strong id="streamCount">10</strong><span>Commerce streams</span></article>
-        <article><strong id="roleCount">60+</strong><span>Role pathways</span></article>
-        <article><strong>SA + Global</strong><span>Career context</span></article>
-        <article><strong>Rule-based</strong><span>Guidance engine</span></article>
+      <div class="hero-panel">
+        <article>
+          <strong id="streamCount">10</strong>
+          <span>Career streams</span>
+        </article>
+        <article>
+          <strong id="roleCount">60+</strong>
+          <span>Role pathways</span>
+        </article>
+        <article>
+          <strong>SA + Global</strong>
+          <span>Relevant context</span>
+        </article>
+        <article>
+          <strong>Guided</strong>
+          <span>Rule-based support</span>
+        </article>
       </div>
     </section>
 
-    <section class="section context" id="context">
+    <section class="section-block intro-section">
       <div class="section-head">
-        <p class="eyebrow">Why this platform exists</p>
-        <h2>Commerce careers are broader than one qualification or one job title.</h2>
-        <p>South Africa needs people who can improve business performance, strengthen governance, support SMEs, finance infrastructure, analyse policy, modernise public finance, build ethical companies and use data responsibly. This platform helps users navigate those pathways without forcing them into a single narrow route.</p>
+        <p class="eyebrow">Platform purpose</p>
+        <h2>Career guidance that moves from confusion to action.</h2>
+        <p>This platform is designed for students, graduates, early-career professionals and career changers who want to understand commerce career options and build a realistic next step. It is structured around interests, strengths, work preferences and direction, not only qualifications.</p>
       </div>
       <div class="insight-grid">
-        <article><h3>South African relevance</h3><p>Careers connect to JSE-listed companies, banks, audit firms, mining houses, retailers, telecoms, public sector entities, DFIs, SMEs, startups, NGOs and impact organisations.</p></article>
-        <article><h3>Global portability</h3><p>The same capabilities travel into Africa, Europe, the United States, the Middle East, global multinationals, consulting firms, banks, investment houses and development institutions.</p></article>
-        <article><h3>Future pressure</h3><p>AI, automation, ESG, analytics, regulation and economic change will reward people who combine technical skill with judgment, ethics, communication and adaptability.</p></article>
+        <article class="info-card">
+          <h3>South African context</h3>
+          <p>Explore careers connected to JSE-listed companies, banks, retailers, mining houses, telecoms, FMCG, logistics, manufacturing, public sector entities, DFIs, audit firms, SMEs, startups and NGOs.</p>
+        </article>
+        <article class="info-card">
+          <h3>Global relevance</h3>
+          <p>Many of these skills transfer into Africa, Europe, the United States, the Middle East, multinational companies, global banks, consulting firms, international NGOs and development institutions.</p>
+        </article>
+        <article class="info-card">
+          <h3>Future readiness</h3>
+          <p>AI, automation, ESG, analytics and regulation are changing commerce careers. The platform highlights what may be automated and what human skills will become more valuable.</p>
+        </article>
       </div>
     </section>
 
-    <section class="section dark" id="streams">
+    <section id="streams" class="section-block dark-section">
       <div class="section-head">
         <p class="eyebrow">Career streams</p>
-        <h2>Choose a broad direction before choosing a job title.</h2>
-        <p>Each stream includes role pathways, South African context, global transferability, a 2-minute video script and recommended next steps.</p>
+        <h2>Start with a broad direction.</h2>
+        <p>Career streams help you understand the kind of business problems you may enjoy before choosing a specific role.</p>
       </div>
       <div id="streamCards" class="stream-grid"></div>
     </section>
 
-    <section class="section" id="video-learning">
-      <div class="section-head">
-        <p class="eyebrow">Video-ready learning</p>
-        <h2>2-minute career explainer blocks.</h2>
-        <p>Add video files later under <code>videos/</code>. The transcript and script are already included so learners can read even before videos are produced.</p>
-      </div>
-      <div id="videoCards" class="video-grid"></div>
-    </section>
-
-    <section class="section band" id="roles">
+    <section id="roles" class="section-block light-section">
       <div class="section-head">
         <p class="eyebrow">Role explorer</p>
-        <h2>Search and filter commerce careers.</h2>
-        <p>Open any role for an insider guide covering work rhythm, skills, tools, industries, South African relevance, global relevance, future outlook and preparation.</p>
+        <h2>Explore commerce careers.</h2>
+        <p>Search, filter and open role guides. Role pages include daily work, skills, tools, industries, case studies, future outlook and preparation steps.</p>
       </div>
       <div class="toolbar">
-        <input id="roleSearch" type="search" placeholder="Search roles, skills, industries...">
-        <select id="streamFilter" aria-label="Filter by stream"></select>
-        <button class="btn secondary" id="showBookmarks" type="button">Saved roles</button>
+        <input id="roleSearch" type="search" placeholder="Search roles, skills or industries">
+        <select id="streamFilter" aria-label="Filter by career stream"></select>
+        <button id="showBookmarks" class="btn subtle" type="button">Saved roles</button>
       </div>
       <div id="roleCards" class="role-grid"></div>
     </section>
 
-    <section class="section" id="role-detail">
-      <div id="roleDetail" class="role-detail-empty">
-        <p class="eyebrow">Role page</p>
-        <h2>Select a role to see the full career guide.</h2>
-        <p>Recently viewed roles and saved roles are stored in your browser using localStorage.</p>
+    <section id="role-detail" class="section-block">
+      <div id="roleDetail" class="empty-state">
+        <p class="eyebrow">Role guide</p>
+        <h2>Select a role to view detailed guidance.</h2>
+        <p>Use the role cards above or the assessment results to open a detailed career guide.</p>
       </div>
     </section>
 
-    <section class="section dark" id="pivot">
+    <section id="compare" class="section-block light-section">
+      <div class="section-head">
+        <p class="eyebrow">Compare careers</p>
+        <h2>Put pathways side by side.</h2>
+        <p>Choose up to three roles and compare their purpose, skills, work style, industries and first portfolio project.</p>
+      </div>
+      <div class="compare-controls">
+        <select id="compareOne" aria-label="First role to compare"></select>
+        <select id="compareTwo" aria-label="Second role to compare"></select>
+        <select id="compareThree" aria-label="Third role to compare"></select>
+      </div>
+      <div id="compareTable" class="comparison-panel"></div>
+    </section>
+
+    <section id="pivot" class="section-block dark-section">
       <div class="section-head">
         <p class="eyebrow">Career Pivot Navigator</p>
-        <h2>Turn your current experience into a commerce career bridge.</h2>
-        <p>Enter your background, skills and preferences. The rule-based engine recommends realistic, stretch, safer and leadership pathways with a bridge map and 6-month plan.</p>
+        <h2>Turn your current experience into a career bridge.</h2>
+        <p>This section is optional. Use it if you want guidance from your current job, studies or experience into possible commerce roles.</p>
       </div>
       <div class="pivot-layout">
-        <form id="pivotForm" class="panel form-panel">
-          <label>Current profession or job title<input name="currentRole" placeholder="e.g. Auditor, retail manager, teacher, graduate"></label>
-          <label>Current industry<input name="industry" placeholder="e.g. retail, banking, public sector, education"></label>
-          <label>Experience level<select name="experience"><option>Student or graduate</option><option>0-2 years</option><option>3-5 years</option><option>6+ years</option></select></label>
-          <label>Skills you already have<textarea name="skills" placeholder="e.g. Excel, reporting, customer service, reconciliations, sales, admin, analysis"></textarea></label>
-          <label>Topics you enjoy<textarea name="interests" placeholder="e.g. numbers, strategy, tax, data, public policy, entrepreneurship, impact"></textarea></label>
-          <label>Preferred work style<select name="style"><option value="analytical">Analytical and structured</option><option value="people">People-facing and advisory</option><option value="digital">Digital, systems and data</option><option value="impact">Impact, public sector or development</option><option value="entrepreneurial">Entrepreneurial and growth-focused</option><option value="technical">Technical specialist</option></select></label>
-          <label>Career motivation<select name="motivation"><option value="stability">Stable professional career</option><option value="growth">High-growth career</option><option value="leadership">Leadership path</option><option value="impact">High-impact work</option><option value="income">Income and marketability</option></select></label>
-          <label>Study or knowledge background<input name="study" placeholder="e.g. BCom, accounting, economics, diploma, self-taught"></label>
+        <form id="pivotForm" class="form-card">
+          <div class="form-grid">
+            <label>Current role or starting point
+              <input name="currentRole" placeholder="e.g. student, auditor, teacher, retail manager">
+            </label>
+            <label>Current industry
+              <input name="industry" placeholder="e.g. retail, banking, education, public sector">
+            </label>
+            <label>Experience level
+              <select name="experience">
+                <option>Student or graduate</option>
+                <option>0-2 years</option>
+                <option>3-5 years</option>
+                <option>6+ years</option>
+              </select>
+            </label>
+            <label>Preferred work style
+              <select name="style">
+                <option value="analytical">Analytical and structured</option>
+                <option value="people">People-facing and advisory</option>
+                <option value="digital">Digital, systems and data</option>
+                <option value="impact">Impact, public sector or development</option>
+                <option value="entrepreneurial">Entrepreneurial and growth-focused</option>
+                <option value="technical">Technical specialist</option>
+              </select>
+            </label>
+            <label>Skills you already have
+              <textarea name="skills" placeholder="e.g. Excel, reporting, customer service, reconciliations, sales, administration"></textarea>
+            </label>
+            <label>Topics you enjoy
+              <textarea name="interests" placeholder="e.g. numbers, strategy, tax, data, policy, entrepreneurship, social impact"></textarea>
+            </label>
+            <label>Career motivation
+              <select name="motivation">
+                <option value="stability">Stable professional career</option>
+                <option value="growth">High-growth career</option>
+                <option value="leadership">Leadership path</option>
+                <option value="impact">High-impact work</option>
+                <option value="income">Income and marketability</option>
+              </select>
+            </label>
+            <label>Study or knowledge background
+              <input name="study" placeholder="e.g. BCom, accounting, economics, diploma, self-taught">
+            </label>
+          </div>
           <button class="btn primary" type="submit">Generate my pivot map</button>
         </form>
-        <div id="pivotResults" class="panel result-placeholder">
+        <div id="pivotResults" class="result-card">
           <h3>Your recommendations will appear here.</h3>
-          <p>Examples of starting points supported: accountant, auditor, bookkeeper, tax practitioner, finance clerk, banker, retail manager, teacher, administrator, entrepreneur, NGO worker, graduate, student, unemployed job seeker and small business owner.</p>
+          <p>Use this if you are moving from another path, such as accounting, auditing, retail, teaching, administration, banking, public sector, NGO work, entrepreneurship or unemployment.</p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="stuck">
+    <section id="assistance" class="section-block">
       <div class="section-head">
-        <p class="eyebrow">I'm Stuck - Help Me Choose</p>
-        <h2>A low-pressure guidance assistant.</h2>
-        <p>Answer a few simple prompts. The assistant responds with career streams, role suggestions and next actions.</p>
+        <p class="eyebrow">I Need Assistance</p>
+        <h2>Not sure where to start?</h2>
+        <p>Answer a few low-pressure prompts. The guidance engine will suggest career streams, roles and next actions.</p>
       </div>
-      <div class="assistant-shell">
+      <div class="assistant-card">
         <div id="assistantTranscript" class="assistant-transcript"></div>
         <div id="assistantOptions" class="assistant-options"></div>
-        <button id="restartAssistant" class="btn secondary" type="button">Restart guidance</button>
+        <button id="restartAssistant" class="btn subtle" type="button">Restart guidance</button>
       </div>
     </section>
 
-    <section class="section band" id="assessments">
+    <section id="assessments" class="section-block light-section">
       <div class="section-head">
         <p class="eyebrow">Assessment dashboard</p>
         <h2>Reflective career-fit assessments.</h2>
-        <p>Assessments use scenario questions, randomised question banks, progress indicators, saved results and printable summaries.</p>
+        <p>These assessments are not exams. They use practical workplace scenarios to help you think about fit, motivation, work style and next steps.</p>
       </div>
       <div class="assessment-grid">
-        <article class="assessment-card"><h3>Stream-Fit Assessment</h3><p>15 scenario questions. Identifies your top 3 commerce streams.</p><button class="btn primary" data-start-assessment="stream">Start</button></article>
-        <article class="assessment-card"><h3>Consolidated Career-Fit Assessment</h3><p>20 questions. Recommends best-fit roles across the full platform.</p><button class="btn primary" data-start-assessment="career">Start</button></article>
-        <article class="assessment-card"><h3>Role-Specific Assessment</h3><p>Open any role and select “Take role assessment” for tailored fit guidance.</p><a class="btn secondary" href="#roles">Choose a role</a></article>
-        <article class="assessment-card"><h3>Career Pivot Assessment</h3><p>Combines form input and preference signals to map transition options.</p><a class="btn secondary" href="#pivot">Go to pivot</a></article>
+        <article class="assessment-card">
+          <h3>Stream-Fit Assessment</h3>
+          <p>Identify your top commerce career streams.</p>
+          <button class="btn primary" data-start-assessment="stream" type="button">Start assessment</button>
+        </article>
+        <article class="assessment-card">
+          <h3>Career-Fit Assessment</h3>
+          <p>Compare role families and receive role suggestions.</p>
+          <button class="btn primary" data-start-assessment="career" type="button">Start assessment</button>
+        </article>
+        <article class="assessment-card">
+          <h3>Role-Specific Fit</h3>
+          <p>Open a role guide and choose “Take role assessment.”</p>
+          <a class="btn subtle" href="#roles">Choose a role</a>
+        </article>
       </div>
       <div id="assessmentRunner" class="assessment-runner"></div>
     </section>
 
-    <section class="section" id="compare">
+    <section id="future" class="section-block dark-section">
       <div class="section-head">
-        <p class="eyebrow">Compare careers</p>
-        <h2>Put pathways side by side.</h2>
-      </div>
-      <div class="compare-controls">
-        <select id="compareOne"></select>
-        <select id="compareTwo"></select>
-        <select id="compareThree"></select>
-      </div>
-      <div id="compareTable" class="table-wrap"></div>
-    </section>
-
-    <section class="section dark" id="future">
-      <div class="section-head">
-        <p class="eyebrow">Future skills</p>
-        <h2>What commerce careers may look like in 10 years.</h2>
-        <p>AI will not remove the need for commerce professionals. It will change what good looks like. Routine production becomes faster; judgment, ethics, storytelling, stakeholder trust and digital fluency become more valuable.</p>
+        <p class="eyebrow">Future of commerce careers</p>
+        <h2>What may change over the next 10 years.</h2>
+        <p>Routine production will become faster. Human value will move toward judgement, ethics, communication, problem framing, stakeholder trust and strategic decision-making.</p>
       </div>
       <div class="future-grid">
-        <article><h3>Automated</h3><p>Basic reconciliations, first-draft commentary, repetitive reporting, standard tax checks, transaction screening and dashboard refreshes.</p></article>
-        <article><h3>Augmented</h3><p>Forecasting, scenario planning, fraud detection, economic research, policy analysis, valuation support and performance diagnosis.</p></article>
-        <article><h3>More human</h3><p>Ethical judgement, leadership, negotiation, business partnering, ambiguity tolerance, public interest thinking and strategic decision-making.</p></article>
-        <article><h3>Learn now</h3><p>Excel, Power BI, SQL basics, financial modelling, research writing, AI prompting, ESG literacy, communication and portfolio projects.</p></article>
-      </div>
-    </section>
-
-    <section class="section band" id="roadmap">
-      <div class="section-head">
-        <p class="eyebrow">6-month action roadmap</p>
-        <h2>From interest to evidence.</h2>
-      </div>
-      <div class="timeline">
-        <article><strong>Month 1</strong><p>Choose two streams. Read 6 role pages. Save roles that energise you.</p></article>
-        <article><strong>Month 2</strong><p>Build Excel and business writing foundations. Complete one mini analysis project.</p></article>
-        <article><strong>Month 3</strong><p>Learn Power BI or dashboard basics. Create one visual portfolio piece.</p></article>
-        <article><strong>Month 4</strong><p>Complete a role-specific project: tax review, valuation, forecast, credit memo or policy brief.</p></article>
-        <article><strong>Month 5</strong><p>Conduct three career conversations. Refine your CV and interview stories.</p></article>
-        <article><strong>Month 6</strong><p>Apply for internships, graduate programmes, entry roles or internal pivots with evidence.</p></article>
+        <article class="info-card"><h3>Automated</h3><p>Basic reconciliations, repetitive reports, first-draft commentary, standard checks and dashboard refreshes.</p></article>
+        <article class="info-card"><h3>Augmented</h3><p>Forecasting, scenario planning, risk analysis, valuation support, policy research and performance diagnosis.</p></article>
+        <article class="info-card"><h3>More human</h3><p>Ethical judgement, leadership, negotiation, influence, ambiguity tolerance and strategic communication.</p></article>
+        <article class="info-card"><h3>Learn now</h3><p>Excel, Power BI, SQL basics, financial modelling, business writing, AI prompting, ESG literacy and portfolio projects.</p></article>
       </div>
     </section>
   </main>
 
-  <button id="floatingHelp" class="floating-help" type="button">I'm stuck</button>
+  <button id="floatingHelp" class="floating-help" type="button">I need assistance</button>
 
   <footer class="footer">
-    <p>Commerce Career Navigator. Built for GitHub Pages with HTML, CSS and JavaScript only.</p>
-    <p>No personal data is sent to a server. Assessment results are stored only in your browser.</p>
+    <p>Commerce Career Navigator. Built for GitHub Pages using HTML, CSS and JavaScript only.</p>
+    <p>No responses are sent to a server. Saved roles and results stay in the user’s browser.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

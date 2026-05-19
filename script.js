@@ -1,37 +1,672 @@
-const streams=[
-{id:"finance",name:"Finance and Corporate Performance",tag:"Performance",roles:["FP&A Analyst","Commercial Finance Analyst","Finance Business Partner","Treasury Analyst","Corporate Finance Analyst","Valuations Analyst","M&A Analyst","CFO Pathway"],sa:"Vital in JSE-listed groups, retailers, telecoms, banks, mining houses, manufacturers and fast-growing SMEs that need better planning, cash discipline and capital allocation.",global:"Portable into multinationals, investment groups, corporate development teams and regional finance hubs.",video:"Finance and corporate performance is about helping organisations make better decisions with numbers. You may enjoy this stream if you like forecasting, budgets, margins, cash, valuation and business partnering. In South Africa, these roles matter because companies face cost pressure, infrastructure constraints, currency volatility and the need to grow responsibly. In future, routine reporting will be automated, but people who can interpret results, challenge assumptions and influence decisions will become more valuable."},
-{id:"accounting",name:"Accounting, Audit and Assurance",tag:"Trust",roles:["Financial Accountant","Management Accountant","External Auditor","Internal Auditor","Forensic Auditor","Risk and Controls Specialist","Financial Controller"],sa:"Supports trust, governance, audit quality, public confidence, investor reporting and stronger controls across private and public organisations.",global:"Transfers well through IFRS, audit firms, multinational finance teams and governance roles.",video:"Accounting, audit and assurance careers protect the credibility of financial information. You may enjoy this stream if you value accuracy, evidence, ethics and controls. In South Africa, these careers support trust in companies, municipalities, state entities, NGOs and financial institutions. Automation will reduce routine reconciliations, but professional judgement, fraud awareness and governance insight will remain essential."},
-{id:"tax",name:"Taxation and Regulatory Careers",tag:"Regulation",roles:["Tax Consultant","Tax Analyst","VAT Specialist","International Tax Specialist","Transfer Pricing Analyst","Tax Risk and Compliance Specialist"],sa:"Important for SARS compliance, VAT, corporate tax, cross-border groups, SMEs, public finance and responsible business behaviour.",global:"Useful in global advisory firms, multinational tax teams, trade hubs and international structuring roles.",video:"Tax careers sit where law, finance and business decisions meet. You may enjoy this stream if you like technical rules, problem solving and advising organisations responsibly. South Africa needs strong tax professionals because compliance, VAT, public revenue and cross-border trade matter deeply. AI will help with research and checking, but judgement and ethics will remain central."},
-{id:"economics",name:"Economics, Policy and Research",tag:"Research",roles:["Economist","Economic Research Analyst","Policy Analyst","Market Research Analyst","Trade Analyst","Public Sector Economist"],sa:"Helps banks, retailers, government, DFIs, investors and public institutions interpret inflation, unemployment, interest rates, trade and growth.",global:"Transfers into think tanks, central banks, development institutions, consultancies, NGOs and market research teams.",video:"Economics and policy careers help decision-makers understand the wider environment. You may enjoy this stream if you like research, evidence, policy and big-picture questions. In South Africa, economists help interpret unemployment, inflation, infrastructure, public finance and development challenges. In future, data tools will accelerate research, but clear judgement and policy communication will matter more."},
-{id:"markets",name:"Banking, Investment and Financial Markets",tag:"Capital",roles:["Credit Analyst","Investment Analyst","Equity Research Analyst","Portfolio Analyst","Corporate Banking Analyst","Private Equity Analyst","Asset Management Analyst"],sa:"Supports banks, asset managers, pension funds, private equity, credit decisions, business funding and investment allocation.",global:"Portable into global banks, funds, financial centres, family offices and investment research teams.",video:"Banking and investment careers move capital toward companies, governments and projects. You may enjoy this stream if you like markets, credit, valuation, risk and investment judgement. In South Africa, these roles influence business funding, savings, infrastructure and long-term wealth creation. In future, screening will be automated, but judgement about people, risk and value will remain human."},
-{id:"impact",name:"Development Finance and Impact",tag:"Impact",roles:["Development Finance Analyst","Impact Investment Analyst","ESG Analyst","Sustainability Finance Analyst","Infrastructure Finance Analyst","Public Finance Analyst","Grant and Donor Funding Analyst"],sa:"Connects directly to infrastructure, transformation, township economy, SME growth, climate resilience, public finance and social impact.",global:"Relevant to DFIs, NGOs, climate funds, foundations, impact investors and multilateral institutions.",video:"Development finance and impact careers use finance to solve real economic and social problems. You may enjoy this stream if you care about projects, communities, sustainability and inclusive growth. In South Africa, these roles matter for infrastructure, SMEs, energy, public finance and transformation. Future professionals will need impact measurement, ESG fluency and strong investment discipline."},
-{id:"consulting",name:"Strategy, Consulting and Business Advisory",tag:"Advisory",roles:["Strategy Analyst","Management Consultant","Business Analyst","Transformation Analyst","Operations Analyst","Turnaround and Restructuring Analyst"],sa:"Helps companies, public entities and SMEs solve performance, operating model, turnaround, growth and transformation problems.",global:"Transfers into consulting firms, internal strategy teams, international NGOs and transformation offices.",video:"Consulting and advisory careers help organisations solve difficult problems. You may enjoy this stream if you like structured thinking, client work, presentations and variety. South African organisations need support with growth, transformation, operational improvement and public-sector delivery. AI will speed research, but client trust and synthesis will remain valuable."},
-{id:"digital",name:"Data, Digital Finance and Business Intelligence",tag:"Digital",roles:["Finance Data Analyst","BI Analyst","Revenue Analyst","Pricing Analyst","Automation Analyst","Digital Transformation Analyst","AI in Finance Analyst"],sa:"Supports digital transformation, dashboarding, automation, pricing, analytics and better decisions across banks, retailers, telecoms and startups.",global:"Portable into tech-enabled finance teams, analytics hubs, SaaS businesses and multinational shared services.",video:"Digital finance careers combine business, data and technology. You may enjoy this stream if you like dashboards, automation, systems and patterns. In South Africa, digital finance can help organisations make faster decisions despite resource constraints. In future, these roles will become even more central as AI and analytics reshape finance work."},
-{id:"entrepreneurship",name:"Entrepreneurship and Business Leadership",tag:"Build",roles:["Entrepreneur","Business Development Manager","General Manager","Operations Manager","Founder-CFO Hybrid Pathway","Business Unit Leader"],sa:"Important for SME growth, township economy, job creation, startups, family businesses and operational leadership.",global:"Relevant to startups, SMEs, scale-ups, franchises, social enterprises and corporate venture building.",video:"Entrepreneurship and business leadership careers are about building and running organisations. You may enjoy this stream if you like ownership, customers, growth and practical problem solving. South Africa needs entrepreneurs and operators who can create jobs and build resilient SMEs. Future leaders will need finance discipline, digital tools and adaptable strategy."},
-{id:"public",name:"Public Sector, Governance and Development",tag:"Governance",roles:["Public Finance Analyst","Municipal Finance Specialist","Governance Analyst","Compliance Officer","Public Policy Finance Analyst","Development Programme Analyst"],sa:"Supports municipalities, public finance reform, governance, service delivery, compliance, infrastructure and development programmes.",global:"Relevant to governments, NGOs, donor agencies, development institutions and policy organisations.",video:"Public sector, governance and development careers connect commerce skills to public value. You may enjoy this stream if you care about accountability, service delivery, public finance and development. South Africa needs stronger governance and financial management across public institutions. Future roles will require data, ethics, policy insight and implementation discipline."}];
-const baseCases=[["Retail profitability turnaround","A South African retail chain faces margin pressure and uneven store performance.","The professional analyses sales, gross margin, stock cover, markdowns and store clusters, then supports pricing, promotion and inventory decisions.","Merchandising, operations, supply chain, CFO and store managers.","The business identifies profit leaks, improves stock allocation and protects cash."],["Bank credit decision","A bank must decide whether to extend funding to a growing SME.","The professional reviews cash flow, repayment ability, sector risk, collateral, management quality and downside scenarios.","Relationship banker, credit committee, risk, business owner and legal team.","A better credit decision balances growth with responsible lending."],["Mining capital project","A mining house evaluates a major equipment or energy investment.","The professional models capex, operating savings, downtime, commodity exposure, ESG considerations and payback.","Operations, engineering, sustainability, finance and board committees.","Leaders approve, delay or redesign the investment based on value and risk."],["Public finance improvement","A municipality or public entity needs stronger budget control and reporting.","The professional analyses expenditure patterns, revenue collection, compliance gaps and service delivery constraints.","Finance officials, programme managers, auditors, communities and oversight bodies.","Improved reporting supports accountability and better service delivery."],["SME cash-flow rescue","A small business has sales but weak cash flow.","The professional examines debtor days, stock levels, supplier terms, pricing and expenses.","Founder, accountant, bank, suppliers and sales team.","The SME gets a practical cash plan and avoids unnecessary distress."]];
-const roles=[];streams.forEach(s=>s.roles.forEach((name,i)=>roles.push({id:(s.id+"-"+name).toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),name,stream:s.id,streamName:s.name,level:i<2?"Entry to early career":i<5?"Specialist pathway":"Leadership pathway",overview:`${name} helps organisations make better decisions inside the ${s.name.toLowerCase()} stream. The role connects evidence, analysis and communication to practical choices.`,why:`It matters because ${s.sa.toLowerCase()}`,decisions:["resource allocation","risk management","performance improvement","funding choices","strategy execution"],skills:["Excel and structured analysis","Business writing and storytelling","Stakeholder communication","Commercial judgement","Digital and data literacy"],tools:["Excel","Power BI","ERP or accounting systems","Presentation tools","AI and automation tools"],industries:["JSE-listed companies","banks","retailers","mining houses","telecoms","FMCG","logistics","manufacturing","public sector","SMEs","startups","NGOs"],traits:"Curious, disciplined, ethical, willing to learn and able to turn information into decisions.",struggle:"May be difficult for someone who dislikes ambiguity, deadlines, stakeholder questions or building technical confidence.",projects:["Build a dashboard or model for a real business question","Write a one-page decision memo","Prepare an interview story using problem, analysis, recommendation and outcome"],sa:s.sa,global:s.global,cases:baseCases.map(c=>({title:c[0],context:c[1],role:c[2],stakeholders:c[3],outcome:c[4]}))})));
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],store={get:(k,d)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d)),set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
-function init(){ $("#streamCount").textContent=streams.length;$("#roleCount").textContent=roles.length;renderStreams();renderVideos();renderRoleFilters();renderRoles();renderCompare();renderAssistant();bind();renderRecent();}
-function bind(){$(".menu-toggle").onclick=()=>$(".nav").classList.toggle("open");$("#roleSearch").oninput=renderRoles;$("#streamFilter").onchange=renderRoles;$("#showBookmarks").onclick=()=>renderRoles(true);$("#pivotForm").onsubmit=e=>{e.preventDefault();runPivot(new FormData(e.target));};$$("[data-start-assessment]").forEach(b=>b.onclick=()=>startAssessment(b.dataset.startAssessment));$("#floatingHelp").onclick=()=>location.hash="stuck";$("#restartAssistant").onclick=()=>{assistantState.answers=[];renderAssistant(true)};["compareOne","compareTwo","compareThree"].forEach(id=>$("#"+id).onchange=renderCompare);}
-function renderStreams(){ $("#streamCards").innerHTML=streams.map(s=>`<article class="stream-card"><div><span class="tag">${s.tag}</span><h3>${s.name}</h3><p>${s.sa}</p><p><strong>Roles:</strong> ${s.roles.slice(0,5).join(", ")}...</p></div><button class="btn secondary" onclick="filterStream('${s.id}')">Explore stream</button></article>`).join("");}
-function renderVideos(){ $("#videoCards").innerHTML=streams.map(s=>`<article class="video-card"><span class="tag">${s.tag}</span><h3>Watch 2-Minute Career Explainer</h3><div class="video-box"><video controls src="videos/${s.id}.mp4"></video></div><h4>${s.name}</h4><p><strong>Script:</strong> ${s.video}</p><details><summary>Transcript</summary><p>${s.video}</p></details></article>`).join("");}
-function renderRoleFilters(){ $("#streamFilter").innerHTML='<option value="all">All streams</option>'+streams.map(s=>`<option value="${s.id}">${s.name}</option>`).join("");["compareOne","compareTwo","compareThree"].forEach((id,i)=>{$("#"+id).innerHTML=roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join("");$("#"+id).value=roles[i*8]?.id||roles[0].id;});}
-function filterStream(id){$("#streamFilter").value=id;location.hash="roles";renderRoles();}
-function renderRoles(bookmarksOnly=false){const q=$("#roleSearch").value.toLowerCase(),f=$("#streamFilter").value,saved=store.get("bookmarks",[]);let list=roles.filter(r=>(f==="all"||r.stream===f)&&(!bookmarksOnly||saved.includes(r.id)));if(q)list=list.filter(r=>JSON.stringify(r).toLowerCase().includes(q));$("#roleCards").innerHTML=list.map(r=>`<article class="role-card"><div><span class="tag">${r.streamName}</span><h3>${r.name}</h3><p>${r.overview}</p><p><strong>SA:</strong> ${r.sa}</p></div><div><button class="btn secondary" onclick="openRole('${r.id}')">Open role</button> <button class="btn secondary bookmark ${saved.includes(r.id)?"saved":""}" onclick="toggleBookmark('${r.id}')">${saved.includes(r.id)?"Saved":"Save"}</button></div></article>`).join("")||"<p>No matching roles found.</p>";}
-function toggleBookmark(id){let saved=store.get("bookmarks",[]);saved=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];store.set("bookmarks",saved);renderRoles();}
-function openRole(id){const r=roles.find(x=>x.id===id);let recent=store.get("recent",[]).filter(x=>x!==id);store.set("recent",[id,...recent].slice(0,6));$("#roleDetail").className="";$("#roleDetail").innerHTML=`<div class="role-hero"><span class="tag">${r.streamName}</span><h2>${r.name}</h2><p>${r.overview}</p><p><strong>Why it matters:</strong> ${r.why}</p><div class="role-actions"><button class="btn primary" onclick="startRoleAssessment('${r.id}')">Take role assessment</button><button class="btn ghost bookmark" onclick="toggleBookmark('${r.id}')">Save role</button><button class="btn ghost" onclick="window.print()">Print summary</button></div></div><div class="detail-grid"><article><h3>A day in the life</h3><p>Review data, clarify the business question, analyse drivers, speak to stakeholders, prepare a recommendation and update leaders on risk, opportunity or performance.</p></article><article><h3>Responsibilities</h3><ul class="mini-list"><li>Daily: investigate movements and answer questions.</li><li>Weekly: update dashboards and meet stakeholders.</li><li>Monthly: prepare packs, commentary and decisions.</li><li>Project-based: build models, reviews, proposals or improvement plans.</li></ul></article><article><h3>Who it suits</h3><p>${r.traits}</p><h3>Who may struggle</h3><p>${r.struggle}</p></article></div><h3>Skills and tools</h3><div class="skill-grid">${r.skills.map(s=>`<article><h4>${s}</h4><p>Practise this through a portfolio project and interview story.</p></article>`).join("")}</div><div class="detail-grid"><article><h3>Tools</h3><ul class="mini-list">${r.tools.map(x=>`<li>${x}</li>`).join("")}</ul></article><article><h3>Industries</h3><ul class="mini-list">${r.industries.slice(0,8).map(x=>`<li>${x}</li>`).join("")}</ul></article><article><h3>How to prepare</h3><ul class="mini-list">${r.projects.map(x=>`<li>${x}</li>`).join("")}</ul></article></div><h3>Career pathway</h3><div class="pathway-grid"><article><strong>Entry</strong><p>Intern, graduate or junior analyst.</p></article><article><strong>2-3 years</strong><p>Own workstreams and recurring outputs.</p></article><article><strong>5 years</strong><p>Specialist, manager or senior analyst.</p></article><article><strong>10 years</strong><p>Functional lead or strategic advisor.</p></article><article><strong>Leadership</strong><p>Head of function, partner, director or CFO route.</p></article></div><h3>What this career may look like in 10 years</h3><article><p>Routine production will be increasingly automated. Human value will sit in judgement, ethics, business context, stakeholder trust, scenario thinking and strategic communication. Learn Excel, Power BI, SQL basics, AI prompting, modelling and clear writing now.</p></article><h3>Case study</h3><div class="case-grid">${r.cases.map(c=>`<article class="case-card"><h4>${c.title}</h4><p><strong>Business context:</strong> ${c.context}</p><p><strong>Role of professional:</strong> ${c.role}</p><p><strong>Data/evidence:</strong> performance, financial, market, operational and stakeholder evidence.</p><p><strong>Stakeholders:</strong> ${c.stakeholders}</p><p><strong>Decision supported:</strong> investment, funding, pricing, policy, control, turnaround or growth decision.</p><p><strong>Outcome:</strong> ${c.outcome}</p><p><strong>Why exciting:</strong> You can see analysis shaping a real business result.</p></article>`).join("")}</div><div id="roleAssessmentSlot"></div>`;location.hash="role-detail";renderRecent();}
-function renderRecent(){const ids=store.get("recent",[]);if(!ids.length)return;const names=ids.map(id=>roles.find(r=>r.id===id)?.name).filter(Boolean).join(", ");document.documentElement.style.setProperty("--recent","'"+names+"'");}
-function renderCompare(){const ids=["compareOne","compareTwo","compareThree"].map(id=>$("#"+id).value),rs=ids.map(id=>roles.find(r=>r.id===id));$("#compareTable").innerHTML=`<table><thead><tr><th>Dimension</th>${rs.map(r=>`<th>${r.name}</th>`).join("")}</tr></thead><tbody><tr><td>Stream</td>${rs.map(r=>`<td>${r.streamName}</td>`).join("")}</tr><tr><td>Purpose</td>${rs.map(r=>`<td>${r.overview}</td>`).join("")}</tr><tr><td>SA relevance</td>${rs.map(r=>`<td>${r.sa}</td>`).join("")}</tr><tr><td>Skills</td>${rs.map(r=>`<td>${r.skills.join(", ")}</td>`).join("")}</tr><tr><td>Portfolio project</td>${rs.map(r=>`<td>${r.projects[0]}</td>`).join("")}</tr></tbody></table>`;}
-function q(text,opts){return{text,opts};}function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
-const streamQuestions=[q("A business gives you messy monthly store results. What do you do first?",[["Clean and reconcile the data",["accounting","finance"]],["Look for commercial drivers",["finance","digital"]],["Speak to operations",["consulting","entrepreneurship"]],["Consider wider economic context",["economics","public"]]]),q("Which work gives you energy?",[["Advising leaders with numbers",["finance","consulting"]],["Finding risk or control gaps",["accounting","tax"]],["Analysing markets and investments",["markets","economics"]],["Solving social or infrastructure problems",["impact","public"]]]),q("You prefer problems that are:",[["Structured and technical",["accounting","tax"]],["Commercial and performance-driven",["finance","entrepreneurship"]],["Ambiguous and strategic",["consulting","economics"]],["Data-heavy and digital",["digital","markets"]]]),q("Your ideal stakeholder is:",[["CFO and business managers",["finance"]],["Auditors, regulators and compliance teams",["accounting","tax","public"]],["Investors and banks",["markets","impact"]],["Clients, founders and project teams",["consulting","entrepreneurship"]]]),q("What impact matters most?",[["Better company performance",["finance","digital"]],["Trust and governance",["accounting","tax","public"]],["Investment and funding decisions",["markets","impact"]],["Growth, innovation and jobs",["entrepreneurship","consulting"]]])];
-function buildQuestions(type,role){let pool=[];for(let i=0;i<5;i++)pool=pool.concat(streamQuestions);if(type==="career")pool=pool.concat(roles.slice(0,30).map(r=>q(`A project needs ${r.name.toLowerCase()} judgement. What attracts you?`,[["The analysis and decision impact",[r.stream]],["The stakeholder conversation",["consulting","finance"]],["The controls and risk angle",["accounting","tax"]],["The digital or research angle",["digital","economics"]]])));if(type==="role")pool=Array.from({length:16},(_,i)=>q(`Scenario ${i+1}: You are in a ${role.name} project and the evidence is incomplete. What is your strongest instinct?`,[["Structure the issue, test data and recommend action",3],["Ask stakeholders for context then analyse",2],["Wait for a perfect template",1],["Avoid the uncertain parts",0]]));return shuffle(pool);}
-function startAssessment(type){const qs=buildQuestions(type).slice(0,type==="stream"?15:20);runAssessment(type,qs);}
-function startRoleAssessment(id){const r=roles.find(x=>x.id===id),qs=buildQuestions("role",r).slice(0,10);$("#roleAssessmentSlot").innerHTML='<div class="assessment-runner" id="inlineAssessment"></div>';runAssessment("role",qs,r,$("#inlineAssessment"));}
-function runAssessment(type,qs,role=null,target=$("#assessmentRunner")){target.innerHTML=`<h3>${type==="stream"?"Stream-Fit":type==="career"?"Consolidated Career-Fit":role.name+" Role-Fit"} Assessment</h3><div class="progress"><div class="progress-label"><span>Progress</span><span id="progText">0/${qs.length}</span></div><div class="progress-track"><div class="progress-fill" id="progFill"></div></div></div><form id="assessForm">${qs.map((qq,i)=>`<div class="question"><h4>${i+1}. ${qq.text}</h4><div class="answers">${qq.opts.map((o,j)=>`<label class="answer"><input required type="radio" name="q${i}" value="${j}" data-map='${JSON.stringify(o[1])}'> <span>${o[0]}</span></label>`).join("")}</div></div>`).join("")}<button class="btn primary" type="submit">Show results</button> <button class="btn secondary" type="button" onclick="window.print()">Print summary</button></form><div id="assessResult"></div>`;target.scrollIntoView({behavior:"smooth"});$("#assessForm").onchange=()=>{const n=$$("#assessForm input:checked").length;$("#progText").textContent=n+"/"+qs.length;$("#progFill").style.width=(n/qs.length*100)+"%"};$("#assessForm").onsubmit=e=>{e.preventDefault();scoreAssessment(type,role);};}
-function scoreAssessment(type,role){if(type==="role"){const vals=$$("#assessForm input:checked").map(i=>Number(JSON.parse(i.dataset.map)));const pct=Math.round(vals.reduce((a,b)=>a+b,0)/(vals.length*3)*100);$("#assessResult").innerHTML=`<article class="result-card"><h3>${pct>=75?"Strong fit":pct>=55?"Promising fit":"Exploratory fit"}: ${pct}%</h3><p>Your answers suggest ${role.name} is ${pct>=55?"worth actively exploring":"best explored through a small project first"}.</p><p><strong>Build next:</strong> ${role.skills.slice(0,3).join(", ")}.</p><p><strong>Portfolio:</strong> ${role.projects[0]}.</p></article>`;return;}const scores=Object.fromEntries(streams.map(s=>[s.id,0]));$$("#assessForm input:checked").forEach(i=>JSON.parse(i.dataset.map).forEach((id,idx)=>scores[id]=(scores[id]||0)+3-idx));const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);const topStreams=ranked.slice(0,3).map(([id])=>streams.find(s=>s.id===id));const topRoles=roles.filter(r=>topStreams.map(s=>s.id).includes(r.stream)).slice(0,6);$("#assessResult").innerHTML=`<article class="result-card"><h3>Best match: ${topStreams[0].name}</h3><p>${topStreams[0].sa}</p>${ranked.slice(0,6).map(([id,v])=>{const s=streams.find(x=>x.id===id);const w=Math.round(v/ranked[0][1]*100);return `<div class="bar-row"><strong>${s.name}</strong><div class="bar"><span style="width:${w}%"></span></div><span>${v}</span></div>`;}).join("")}<h3>Top role options</h3><p>${topRoles.map(r=>r.name).join(", ")}</p><h3>6-month plan</h3><p>Choose two roles, build one portfolio project, learn Excel/Power BI or a relevant technical skill, speak to three professionals, and prepare an interview story around evidence-based decision-making.</p><h3>Interview positioning</h3><p>"My strongest fit is ${topStreams[0].name}. I am building evidence through practical projects and I want to help organisations make better decisions in a South African and global context."</p></article>`;store.set("lastAssessment",{date:new Date().toISOString(),top:topStreams[0].name});}
-function runPivot(fd){const text=[fd.get("currentRole"),fd.get("industry"),fd.get("skills"),fd.get("interests"),fd.get("study"),fd.get("style"),fd.get("motivation")].join(" ").toLowerCase();const scores=Object.fromEntries(roles.map(r=>[r.id,0]));roles.forEach(r=>{if(text.includes("account")||text.includes("audit")||text.includes("bookkeep"))scores[r.id]+=r.stream==="accounting"?5:0;if(text.includes("tax")||text.includes("vat"))scores[r.id]+=r.stream==="tax"?6:0;if(text.includes("data")||text.includes("excel")||text.includes("system"))scores[r.id]+=r.stream==="digital"?4:0;if(text.includes("sales")||text.includes("retail")||text.includes("manager"))scores[r.id]+=r.stream==="finance"||r.stream==="entrepreneurship"?3:0;if(text.includes("teacher")||text.includes("admin")||text.includes("project"))scores[r.id]+=r.stream==="consulting"||r.stream==="public"?3:0;if(text.includes("impact")||text.includes("ngo")||text.includes("public"))scores[r.id]+=r.stream==="impact"||r.stream==="public"?5:0;if(text.includes(r.stream))scores[r.id]+=4;});const style=fd.get("style");roles.forEach(r=>{if(style==="analytical"&&["finance","markets","economics"].includes(r.stream))scores[r.id]+=3;if(style==="people"&&["consulting","finance","entrepreneurship"].includes(r.stream))scores[r.id]+=3;if(style==="digital"&&r.stream==="digital")scores[r.id]+=6;if(style==="impact"&&["impact","public"].includes(r.stream))scores[r.id]+=6;if(style==="entrepreneurial"&&r.stream==="entrepreneurship")scores[r.id]+=6;if(style==="technical"&&["accounting","tax"].includes(r.stream))scores[r.id]+=5;});const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([id])=>roles.find(r=>r.id===id));$("#pivotResults").innerHTML=`<h3>Your career bridge map</h3><div class="bridge"><div>Current role<br>${fd.get("currentRole")||"Starting point"}</div><div>Transferable skills<br>${fd.get("skills")||"Experience and learning"}</div><div>Best option<br>${ranked[0].name}</div><div>Skills gap<br>${ranked[0].skills.slice(0,2).join(", ")}</div><div>Next action<br>${ranked[0].projects[0]}</div><div>3-year path<br>Junior to specialist</div></div><h3>Recommendations</h3><article><strong>Best-fit pivot:</strong> ${ranked[0].name}<p>Fits because your background signals transferable capability into ${ranked[0].streamName}.</p></article><article><strong>Second-best:</strong> ${ranked[1].name}<p>Build ${ranked[1].skills.slice(0,2).join(" and ")}.</p></article><article><strong>Stretch option:</strong> ${ranked[2].name}<p>Aim for this after a portfolio project and targeted learning.</p></article><article><strong>Safer transition:</strong> ${ranked[3].name}<p>Target this first if you want a more realistic entry step.</p></article><article><strong>Long-term leadership:</strong> ${ranked[4].name}<p>Build toward this after gaining credibility and stakeholder experience.</p></article><h3>6-month preparation plan</h3><p>Month 1: learn the role. Month 2: build one portfolio project. Month 3: improve Excel/Power BI or technical tools. Month 4: speak to professionals. Month 5: update CV and LinkedIn. Month 6: apply for targeted roles.</p><h3>Interview story</h3><p>"I am pivoting from ${fd.get("currentRole")||"my current background"} into ${ranked[0].name} because my transferable skills include ${fd.get("skills")||"analysis, communication and learning agility"}."</p>`;}
-const assistantSteps=[{q:"What type of work gives you energy?",opts:[["Numbers and decisions","finance"],["Rules, detail and trust","accounting"],["People and advice","consulting"],["Impact and development","impact"],["Systems and data","digital"]]},{q:"Do you prefer structured problems or unclear business problems?",opts:[["Structured","accounting"],["Commercial","finance"],["Unclear and strategic","consulting"],["Research-heavy","economics"],["Build and lead","entrepreneurship"]]},{q:"Where do you imagine yourself?",opts:[["Corporate","finance"],["Banking/investment","markets"],["Public sector","public"],["Consulting","consulting"],["Startup/SME","entrepreneurship"]]}];let assistantState={step:0,answers:[]};
-function renderAssistant(reset=false){if(reset)assistantState={step:0,answers:[]};const t=$("#assistantTranscript"),o=$("#assistantOptions");t.innerHTML='<div class="bubble bot">I will ask a few low-pressure questions and suggest where to start.</div>'+assistantState.answers.map(a=>`<div class="bubble user">${a.label}</div><div class="bubble bot">${a.response}</div>`).join("");const step=assistantSteps[assistantState.step];if(!step){const counts={};assistantState.answers.forEach(a=>counts[a.stream]=(counts[a.stream]||0)+1);const best=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0]||"finance";const s=streams.find(x=>x.id===best);t.innerHTML+=`<div class="bubble bot"><strong>Your starting stream:</strong> ${s.name}. Your answers suggest this stream may match your current energy pattern. Explore roles like ${s.roles.slice(0,4).join(", ")}. Next: take the Stream-Fit Assessment or open two role pages.</div>`;o.innerHTML="";return;}t.innerHTML+=`<div class="bubble bot">${step.q}</div>`;o.innerHTML=step.opts.map(([label,stream])=>`<button class="btn secondary" onclick="answerAssistant('${stream}','${label.replace(/'/g,"")}')">${label}</button>`).join("");}
-function answerAssistant(stream,label){const s=streams.find(x=>x.id===stream);assistantState.answers.push({stream,label,response:`That points toward ${s.name}. This stream rewards people who can connect their preferences to practical business decisions.`});assistantState.step++;renderAssistant();}
-window.filterStream=filterStream;window.openRole=openRole;window.toggleBookmark=toggleBookmark;window.startRoleAssessment=startRoleAssessment;window.answerAssistant=answerAssistant;document.addEventListener("DOMContentLoaded",init);
+const streams = [
+  {
+    id: "finance",
+    name: "Finance and Corporate Performance",
+    tag: "Performance",
+    roles: ["FP&A Analyst", "Commercial Finance Analyst", "Finance Business Partner", "Treasury Analyst", "Corporate Finance Analyst", "Valuations Analyst", "M&A Analyst", "CFO Pathway"],
+    sa: "Vital in JSE-listed groups, retailers, telecoms, banks, mining houses, manufacturers and SMEs that need better planning, cash discipline and capital allocation.",
+    global: "Portable into multinationals, corporate development teams, regional finance hubs and private companies.",
+    fit: "People who like numbers, business performance, forecasts, margins, cash and decision support."
+  },
+  {
+    id: "accounting",
+    name: "Accounting, Audit and Assurance",
+    tag: "Trust",
+    roles: ["Financial Accountant", "Management Accountant", "External Auditor", "Internal Auditor", "Forensic Auditor", "Risk and Controls Specialist", "Financial Controller"],
+    sa: "Supports trust, governance, audit quality, public confidence, investor reporting and stronger controls across private and public organisations.",
+    global: "Transfers well through IFRS, audit firms, multinational finance teams and governance roles.",
+    fit: "People who value accuracy, evidence, ethics, controls and reliable reporting."
+  },
+  {
+    id: "tax",
+    name: "Taxation and Regulatory Careers",
+    tag: "Regulation",
+    roles: ["Tax Consultant", "Tax Analyst", "VAT Specialist", "International Tax Specialist", "Transfer Pricing Analyst", "Tax Risk and Compliance Specialist"],
+    sa: "Important for SARS compliance, VAT, corporate tax, cross-border groups, SMEs, public finance and responsible business behaviour.",
+    global: "Useful in advisory firms, multinational tax teams, trade hubs and international structuring roles.",
+    fit: "People who enjoy technical rules, careful interpretation, compliance and advisory work."
+  },
+  {
+    id: "economics",
+    name: "Economics, Policy and Research",
+    tag: "Research",
+    roles: ["Economist", "Economic Research Analyst", "Policy Analyst", "Market Research Analyst", "Trade Analyst", "Public Sector Economist"],
+    sa: "Helps banks, retailers, government, DFIs, investors and public institutions interpret inflation, unemployment, interest rates, trade and growth.",
+    global: "Transfers into think tanks, central banks, development institutions, consultancies, NGOs and market research teams.",
+    fit: "People who enjoy research, policy, evidence, writing and big-picture economic questions."
+  },
+  {
+    id: "markets",
+    name: "Banking, Investment and Financial Markets",
+    tag: "Capital",
+    roles: ["Credit Analyst", "Investment Analyst", "Equity Research Analyst", "Portfolio Analyst", "Corporate Banking Analyst", "Private Equity Analyst", "Asset Management Analyst"],
+    sa: "Supports banks, asset managers, pension funds, private equity, credit decisions, business funding and investment allocation.",
+    global: "Portable into banks, funds, financial centres, family offices and investment research teams.",
+    fit: "People who like markets, credit, valuation, investment decisions and financial risk."
+  },
+  {
+    id: "impact",
+    name: "Development Finance and Impact",
+    tag: "Impact",
+    roles: ["Development Finance Analyst", "Impact Investment Analyst", "ESG Analyst", "Sustainability Finance Analyst", "Infrastructure Finance Analyst", "Public Finance Analyst", "Grant and Donor Funding Analyst"],
+    sa: "Connects directly to infrastructure, transformation, township economy, SME growth, climate resilience, public finance and social impact.",
+    global: "Relevant to DFIs, NGOs, climate funds, foundations, impact investors and multilateral institutions.",
+    fit: "People who care about development, sustainability, inclusive growth and bankable impact."
+  },
+  {
+    id: "consulting",
+    name: "Strategy, Consulting and Business Advisory",
+    tag: "Advisory",
+    roles: ["Strategy Analyst", "Management Consultant", "Business Analyst", "Transformation Analyst", "Operations Analyst", "Turnaround and Restructuring Analyst"],
+    sa: "Helps companies, public entities and SMEs solve performance, operating model, turnaround, growth and transformation problems.",
+    global: "Transfers into consulting firms, internal strategy teams, international NGOs and transformation offices.",
+    fit: "People who enjoy problem solving, client work, ambiguity, presentations and business improvement."
+  },
+  {
+    id: "digital",
+    name: "Data, Digital Finance and Business Intelligence",
+    tag: "Digital",
+    roles: ["Finance Data Analyst", "BI Analyst", "Revenue Analyst", "Pricing Analyst", "Automation Analyst", "Digital Transformation Analyst", "AI in Finance Analyst"],
+    sa: "Supports digital transformation, dashboarding, automation, pricing, analytics and better decisions across banks, retailers, telecoms and startups.",
+    global: "Portable into tech-enabled finance teams, analytics hubs, SaaS businesses and multinational shared services.",
+    fit: "People who like dashboards, systems, automation, patterns and data-informed decisions."
+  },
+  {
+    id: "entrepreneurship",
+    name: "Entrepreneurship and Business Leadership",
+    tag: "Build",
+    roles: ["Entrepreneur", "Business Development Manager", "General Manager", "Operations Manager", "Founder-CFO Hybrid Pathway", "Business Unit Leader"],
+    sa: "Important for SME growth, township economy, job creation, startups, family businesses and operational leadership.",
+    global: "Relevant to startups, SMEs, scale-ups, franchises, social enterprises and corporate venture building.",
+    fit: "People who like ownership, customers, growth, operations and building something practical."
+  },
+  {
+    id: "public",
+    name: "Public Sector, Governance and Development",
+    tag: "Governance",
+    roles: ["Public Finance Analyst", "Municipal Finance Specialist", "Governance Analyst", "Compliance Officer", "Public Policy Finance Analyst", "Development Programme Analyst"],
+    sa: "Supports municipalities, public finance reform, governance, service delivery, compliance, infrastructure and development programmes.",
+    global: "Relevant to governments, NGOs, donor agencies, development institutions and policy organisations.",
+    fit: "People who care about accountability, service delivery, public value and development."
+  }
+];
+
+const caseStudies = [
+  {
+    title: "Retail profitability improvement",
+    context: "A South African retail chain faces margin pressure and uneven store performance.",
+    evidence: "Sales, gross margin, stock cover, markdowns, basket size, store clusters and supplier costs.",
+    stakeholders: "Merchandising, operations, supply chain, CFO and store managers.",
+    outcome: "The business identifies profit leaks, improves stock allocation and protects cash."
+  },
+  {
+    title: "Bank SME credit decision",
+    context: "A bank must decide whether to extend funding to a growing SME.",
+    evidence: "Cash flow, repayment ability, sector risk, collateral, management quality and downside scenarios.",
+    stakeholders: "Relationship banker, credit committee, risk, legal team and the business owner.",
+    outcome: "A better credit decision balances growth with responsible lending."
+  },
+  {
+    title: "Mining capital project",
+    context: "A mining house evaluates a major equipment or energy investment.",
+    evidence: "Capex, operating savings, downtime, commodity exposure, ESG considerations and payback.",
+    stakeholders: "Operations, engineering, sustainability, finance and board committees.",
+    outcome: "Leaders approve, delay or redesign the investment based on value and risk."
+  },
+  {
+    title: "Public finance improvement",
+    context: "A municipality or public entity needs stronger budget control and reporting.",
+    evidence: "Expenditure patterns, revenue collection, compliance gaps and service delivery constraints.",
+    stakeholders: "Finance officials, programme managers, auditors, communities and oversight bodies.",
+    outcome: "Improved reporting supports accountability and better service delivery."
+  },
+  {
+    title: "SME cash-flow rescue",
+    context: "A small business has sales but weak cash flow.",
+    evidence: "Debtor days, stock levels, supplier terms, pricing, expenses and cash conversion.",
+    stakeholders: "Founder, accountant, bank, suppliers and sales team.",
+    outcome: "The SME gets a practical cash plan and avoids unnecessary distress."
+  }
+];
+
+const roles = streams.flatMap((stream) =>
+  stream.roles.map((name, index) => ({
+    id: `${stream.id}-${name}`.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+    name,
+    stream: stream.id,
+    streamName: stream.name,
+    level: index < 2 ? "Entry to early career" : index < 5 ? "Specialist pathway" : "Leadership pathway",
+    overview: `${name} helps organisations make better decisions in the ${stream.name.toLowerCase()} stream by turning evidence into practical action.`,
+    why: stream.sa,
+    fit: stream.fit,
+    skills: ["Structured analysis", "Business communication", "Commercial judgement", "Digital confidence", "Ethical decision-making"],
+    tools: ["Excel", "Power BI", "ERP or accounting systems", "Presentation tools", "AI and automation tools"],
+    industries: ["JSE-listed companies", "Banks", "Retailers", "Mining houses", "Telecoms", "FMCG", "Logistics", "Manufacturing", "Public sector", "SMEs", "Startups", "NGOs"],
+    projects: ["Build a dashboard or model for a real business question", "Write a one-page decision memo", "Prepare an interview story using problem, analysis, recommendation and outcome"],
+    global: stream.global
+  }))
+);
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+const storage = {
+  get(key, fallback) {
+    try {
+      return JSON.parse(localStorage.getItem(key)) ?? fallback;
+    } catch {
+      return fallback;
+    }
+  },
+  set(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
+
+function init() {
+  $("#streamCount").textContent = streams.length;
+  $("#roleCount").textContent = roles.length;
+  renderStreams();
+  renderFilters();
+  renderRoles();
+  renderCompare();
+  renderAssistant(true);
+  bindEvents();
+}
+
+function bindEvents() {
+  $(".menu-toggle").addEventListener("click", () => $(".site-nav").classList.toggle("open"));
+  $("#roleSearch").addEventListener("input", () => renderRoles());
+  $("#streamFilter").addEventListener("change", () => renderRoles());
+  $("#showBookmarks").addEventListener("click", () => renderRoles(true));
+  $("#pivotForm").addEventListener("submit", handlePivot);
+  $("#restartAssistant").addEventListener("click", () => renderAssistant(true));
+  $("#floatingHelp").addEventListener("click", () => {
+    window.location.hash = "assistance";
+    renderAssistant(true);
+  });
+  $$("[data-start-assessment]").forEach((button) => {
+    button.addEventListener("click", () => startAssessment(button.dataset.startAssessment));
+  });
+  ["compareOne", "compareTwo", "compareThree"].forEach((id) => {
+    $(`#${id}`).addEventListener("change", renderCompare);
+  });
+}
+
+function renderStreams() {
+  $("#streamCards").innerHTML = streams.map((stream) => `
+    <article class="stream-card">
+      <div>
+        <span class="tag">${stream.tag}</span>
+        <h3>${stream.name}</h3>
+        <p>${stream.fit}</p>
+        <p><strong>South Africa:</strong> ${stream.sa}</p>
+      </div>
+      <button class="btn subtle" type="button" onclick="filterStream('${stream.id}')">Explore this stream</button>
+    </article>
+  `).join("");
+}
+
+function renderFilters() {
+  const options = `<option value="all">All streams</option>${streams.map((stream) => `<option value="${stream.id}">${stream.name}</option>`).join("")}`;
+  $("#streamFilter").innerHTML = options;
+  ["compareOne", "compareTwo", "compareThree"].forEach((id, index) => {
+    const select = $(`#${id}`);
+    select.innerHTML = roles.map((role) => `<option value="${role.id}">${role.name}</option>`).join("");
+    select.value = roles[index * 8]?.id || roles[0].id;
+  });
+}
+
+function filterStream(id) {
+  $("#streamFilter").value = id;
+  renderRoles();
+  window.location.hash = "roles";
+}
+
+function renderRoles(bookmarksOnly = false) {
+  const query = $("#roleSearch").value.trim().toLowerCase();
+  const filter = $("#streamFilter").value;
+  const saved = storage.get("ccn-bookmarks", []);
+  let list = roles.filter((role) => filter === "all" || role.stream === filter);
+
+  if (bookmarksOnly) list = list.filter((role) => saved.includes(role.id));
+  if (query) {
+    list = list.filter((role) => JSON.stringify(role).toLowerCase().includes(query));
+  }
+
+  $("#roleCards").innerHTML = list.map((role) => `
+    <article class="role-card">
+      <div>
+        <span class="tag">${role.level}</span>
+        <h3>${role.name}</h3>
+        <p>${role.overview}</p>
+        <p><strong>Stream:</strong> ${role.streamName}</p>
+      </div>
+      <div class="role-actions">
+        <button class="btn subtle" type="button" onclick="openRole('${role.id}')">Open role guide</button>
+        <button class="btn subtle bookmark ${saved.includes(role.id) ? "saved" : ""}" type="button" onclick="toggleBookmark('${role.id}')">${saved.includes(role.id) ? "Saved" : "Save"}</button>
+      </div>
+    </article>
+  `).join("") || `<div class="empty-state"><h3>No roles found</h3><p>Try another stream or search term.</p></div>`;
+}
+
+function toggleBookmark(id) {
+  let saved = storage.get("ccn-bookmarks", []);
+  saved = saved.includes(id) ? saved.filter((item) => item !== id) : [...saved, id];
+  storage.set("ccn-bookmarks", saved);
+  renderRoles();
+}
+
+function openRole(id) {
+  const role = roles.find((item) => item.id === id);
+  if (!role) return;
+  let recent = storage.get("ccn-recent", []).filter((item) => item !== id);
+  storage.set("ccn-recent", [id, ...recent].slice(0, 6));
+
+  $("#roleDetail").className = "role-detail";
+  $("#roleDetail").innerHTML = `
+    <div class="role-hero">
+      <span class="tag">${role.streamName}</span>
+      <h2>${role.name}</h2>
+      <p>${role.overview}</p>
+      <p><strong>Why it matters:</strong> ${role.why}</p>
+      <div class="role-actions">
+        <button class="btn primary" type="button" onclick="startRoleAssessment('${role.id}')">Take role assessment</button>
+        <button class="btn secondary-dark" type="button" onclick="window.print()">Print summary</button>
+      </div>
+    </div>
+
+    <div class="role-section detail-grid">
+      <article class="mini-card">
+        <h3>A day in the life</h3>
+        <p>Review data, clarify the business question, analyse drivers, speak to stakeholders, prepare a recommendation and update leaders on risk, opportunity or performance.</p>
+      </article>
+      <article class="mini-card">
+        <h3>Who this suits</h3>
+        <p>${role.fit}</p>
+      </article>
+      <article class="mini-card">
+        <h3>Who may struggle</h3>
+        <p>People who dislike deadlines, ambiguity, stakeholder questions or building technical confidence may find this role challenging at first.</p>
+      </article>
+    </div>
+
+    <div class="role-section">
+      <h3>Skills to build</h3>
+      <div class="skill-grid">
+        ${role.skills.map((skill) => `<article class="mini-card"><h4>${skill}</h4><p>Practise this through a portfolio project and interview story.</p></article>`).join("")}
+      </div>
+    </div>
+
+    <div class="role-section detail-grid">
+      <article class="mini-card"><h3>Tools</h3><ul>${role.tools.map((item) => `<li>${item}</li>`).join("")}</ul></article>
+      <article class="mini-card"><h3>Industries</h3><ul>${role.industries.slice(0, 8).map((item) => `<li>${item}</li>`).join("")}</ul></article>
+      <article class="mini-card"><h3>How to prepare</h3><ul>${role.projects.map((item) => `<li>${item}</li>`).join("")}</ul></article>
+    </div>
+
+    <div class="role-section">
+      <h3>Career pathway</h3>
+      <div class="pathway-grid">
+        <article class="mini-card"><strong>Entry</strong><p>Intern, graduate or junior analyst.</p></article>
+        <article class="mini-card"><strong>2-3 years</strong><p>Own workstreams and recurring outputs.</p></article>
+        <article class="mini-card"><strong>5 years</strong><p>Senior analyst, specialist or manager.</p></article>
+        <article class="mini-card"><strong>10 years</strong><p>Functional lead, advisor or business leader.</p></article>
+        <article class="mini-card"><strong>Leadership</strong><p>Head of function, partner, director, founder or CFO route.</p></article>
+      </div>
+    </div>
+
+    <div class="role-section">
+      <h3>What this career may look like in 10 years</h3>
+      <article class="mini-card">
+        <p>Routine production will be increasingly automated. Human value will sit in judgement, ethics, business context, stakeholder trust, scenario thinking and strategic communication. Start learning Excel, Power BI, SQL basics, AI prompting, modelling and clear writing now.</p>
+      </article>
+    </div>
+
+    <div class="role-section">
+      <h3>Case studies</h3>
+      <div class="case-grid">
+        ${caseStudies.map((study) => `
+          <article class="case-card">
+            <h4>${study.title}</h4>
+            <p><strong>Business context:</strong> ${study.context}</p>
+            <p><strong>Evidence used:</strong> ${study.evidence}</p>
+            <p><strong>Stakeholders:</strong> ${study.stakeholders}</p>
+            <p><strong>Decision supported:</strong> Investment, funding, pricing, policy, control, turnaround or growth decision.</p>
+            <p><strong>Outcome:</strong> ${study.outcome}</p>
+            <p><strong>Why exciting:</strong> The project shows how analysis can shape a real business result.</p>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+
+    <div id="roleAssessmentSlot" class="role-section"></div>
+  `;
+  window.location.hash = "role-detail";
+}
+
+function renderCompare() {
+  const selected = ["compareOne", "compareTwo", "compareThree"].map((id) => roles.find((role) => role.id === $(`#${id}`).value)).filter(Boolean);
+  if (!selected.length) return;
+
+  $("#compareTable").innerHTML = `
+    <table>
+      <thead>
+        <tr><th>Dimension</th>${selected.map((role) => `<th>${role.name}</th>`).join("")}</tr>
+      </thead>
+      <tbody>
+        <tr><td>Career stream</td>${selected.map((role) => `<td>${role.streamName}</td>`).join("")}</tr>
+        <tr><td>Purpose</td>${selected.map((role) => `<td>${role.overview}</td>`).join("")}</tr>
+        <tr><td>Best suited to</td>${selected.map((role) => `<td>${role.fit}</td>`).join("")}</tr>
+        <tr><td>South African relevance</td>${selected.map((role) => `<td>${role.why}</td>`).join("")}</tr>
+        <tr><td>Global relevance</td>${selected.map((role) => `<td>${role.global}</td>`).join("")}</tr>
+        <tr><td>Portfolio project</td>${selected.map((role) => `<td>${role.projects[0]}</td>`).join("")}</tr>
+      </tbody>
+    </table>
+  `;
+}
+
+function handlePivot(event) {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const text = [
+    form.get("currentRole"),
+    form.get("industry"),
+    form.get("skills"),
+    form.get("interests"),
+    form.get("study"),
+    form.get("style"),
+    form.get("motivation")
+  ].join(" ").toLowerCase();
+
+  const scores = Object.fromEntries(roles.map((role) => [role.id, 0]));
+  roles.forEach((role) => {
+    if (/account|audit|bookkeep|reconcile/.test(text) && role.stream === "accounting") scores[role.id] += 6;
+    if (/tax|vat|sars|compliance/.test(text) && role.stream === "tax") scores[role.id] += 6;
+    if (/data|excel|power bi|system|analytics|dashboard/.test(text) && role.stream === "digital") scores[role.id] += 6;
+    if (/sales|retail|store|customer|manager/.test(text) && ["finance", "entrepreneurship"].includes(role.stream)) scores[role.id] += 4;
+    if (/teacher|admin|project|coordinate|consult/.test(text) && ["consulting", "public"].includes(role.stream)) scores[role.id] += 4;
+    if (/impact|ngo|public|development|community/.test(text) && ["impact", "public"].includes(role.stream)) scores[role.id] += 6;
+    if (/bank|credit|investment|market/.test(text) && role.stream === "markets") scores[role.id] += 6;
+    if (/economics|policy|research/.test(text) && role.stream === "economics") scores[role.id] += 6;
+  });
+
+  const style = form.get("style");
+  roles.forEach((role) => {
+    if (style === "analytical" && ["finance", "markets", "economics"].includes(role.stream)) scores[role.id] += 3;
+    if (style === "people" && ["consulting", "finance", "entrepreneurship"].includes(role.stream)) scores[role.id] += 3;
+    if (style === "digital" && role.stream === "digital") scores[role.id] += 5;
+    if (style === "impact" && ["impact", "public"].includes(role.stream)) scores[role.id] += 5;
+    if (style === "entrepreneurial" && role.stream === "entrepreneurship") scores[role.id] += 5;
+    if (style === "technical" && ["accounting", "tax"].includes(role.stream)) scores[role.id] += 5;
+  });
+
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([id]) => roles.find((role) => role.id === id));
+  const current = form.get("currentRole") || "your current starting point";
+  const skills = form.get("skills") || "your existing experience and learning ability";
+
+  $("#pivotResults").innerHTML = `
+    <h3>Your career bridge map</h3>
+    <div class="bridge">
+      <div>Current role<br>${current}</div>
+      <div>Transferable skills<br>${skills}</div>
+      <div>Best option<br>${ranked[0].name}</div>
+      <div>Skills gap<br>${ranked[0].skills.slice(0, 2).join(", ")}</div>
+      <div>Next action<br>${ranked[0].projects[0]}</div>
+      <div>3-year pathway<br>Junior to specialist</div>
+    </div>
+    <h3>Recommended paths</h3>
+    <p><strong>Best-fit pivot:</strong> ${ranked[0].name}. This fits because your background signals transferable capability into ${ranked[0].streamName}.</p>
+    <p><strong>Second-best option:</strong> ${ranked[1].name}. Build ${ranked[1].skills.slice(0, 2).join(" and ")}.</p>
+    <p><strong>Stretch option:</strong> ${ranked[2].name}. Aim for this after a focused portfolio project.</p>
+    <p><strong>Safer transition:</strong> ${ranked[3].name}. Target this first if you want a more realistic entry step.</p>
+    <p><strong>Long-term leadership option:</strong> ${ranked[4].name}. Build toward this after credibility and stakeholder experience.</p>
+    <h3>6-month preparation plan</h3>
+    <p>Month 1: learn the role. Month 2: build one portfolio project. Month 3: improve Excel, Power BI or the key technical tool. Month 4: speak to three professionals. Month 5: update your CV and LinkedIn. Month 6: apply for targeted roles.</p>
+    <h3>Interview story</h3>
+    <p>“I am pivoting from ${current} into ${ranked[0].name} because my transferable skills include ${skills}, and I am building evidence through practical projects.”</p>
+  `;
+}
+
+const assistantSteps = [
+  {
+    question: "What type of work gives you energy?",
+    options: [
+      ["Numbers and decisions", "finance"],
+      ["Rules, detail and trust", "accounting"],
+      ["People and advice", "consulting"],
+      ["Impact and development", "impact"],
+      ["Systems and data", "digital"]
+    ]
+  },
+  {
+    question: "Do you prefer structured problems or unclear business problems?",
+    options: [
+      ["Structured problems", "accounting"],
+      ["Commercial problems", "finance"],
+      ["Unclear strategic problems", "consulting"],
+      ["Research-heavy questions", "economics"],
+      ["Build-and-lead problems", "entrepreneurship"]
+    ]
+  },
+  {
+    question: "Where do you imagine yourself working?",
+    options: [
+      ["Corporate", "finance"],
+      ["Banking or investments", "markets"],
+      ["Public sector", "public"],
+      ["Consulting", "consulting"],
+      ["Startup or SME", "entrepreneurship"]
+    ]
+  }
+];
+
+let assistantState = { step: 0, answers: [] };
+
+function renderAssistant(reset = false) {
+  if (reset) assistantState = { step: 0, answers: [] };
+  const transcript = $("#assistantTranscript");
+  const options = $("#assistantOptions");
+
+  transcript.innerHTML = `<div class="bubble bot">Let us help you find your ideal career. I’ll ask a few simple questions and suggest where to start.</div>`;
+  assistantState.answers.forEach((answer) => {
+    transcript.innerHTML += `<div class="bubble user">${answer.label}</div><div class="bubble bot">${answer.response}</div>`;
+  });
+
+  const step = assistantSteps[assistantState.step];
+  if (!step) {
+    const counts = {};
+    assistantState.answers.forEach((answer) => counts[answer.stream] = (counts[answer.stream] || 0) + 1);
+    const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || "finance";
+    const stream = streams.find((item) => item.id === best);
+    transcript.innerHTML += `<div class="bubble bot"><strong>Suggested starting stream:</strong> ${stream.name}. Your answers suggest that you may enjoy ${stream.fit.toLowerCase()} Start by opening roles such as ${stream.roles.slice(0, 4).join(", ")}. Then take the Stream-Fit Assessment for a deeper result.</div>`;
+    options.innerHTML = "";
+    return;
+  }
+
+  transcript.innerHTML += `<div class="bubble bot">${step.question}</div>`;
+  options.innerHTML = step.options.map(([label, stream]) => `<button class="btn subtle" type="button" onclick="answerAssistant('${stream}', '${label.replace(/'/g, "")}')">${label}</button>`).join("");
+}
+
+function answerAssistant(streamId, label) {
+  const stream = streams.find((item) => item.id === streamId);
+  assistantState.answers.push({
+    stream: streamId,
+    label,
+    response: `That points toward ${stream.name}. This stream rewards people who can connect their preferences to practical business decisions.`
+  });
+  assistantState.step += 1;
+  renderAssistant();
+}
+
+const streamQuestions = [
+  question("A business gives you messy monthly store results. What would you naturally do first?", [
+    ["Clean and reconcile the data", ["accounting", "finance"]],
+    ["Look for commercial drivers behind the drop", ["finance", "digital"]],
+    ["Speak to operational teams to understand what happened", ["consulting", "entrepreneurship"]],
+    ["Consider wider economic and policy conditions", ["economics", "public"]]
+  ]),
+  question("Which business problem sounds most interesting?", [
+    ["Improving profitability", ["finance", "entrepreneurship"]],
+    ["Strengthening controls and trust", ["accounting", "tax"]],
+    ["Evaluating investments and funding", ["markets", "impact"]],
+    ["Using data to improve decisions", ["digital", "consulting"]]
+  ]),
+  question("Which environment would suit you best?", [
+    ["A corporate finance team", ["finance"]],
+    ["An audit, tax or governance team", ["accounting", "tax"]],
+    ["A bank, fund or investment team", ["markets"]],
+    ["A development, NGO or public programme", ["impact", "public"]]
+  ]),
+  question("What do you want your work to influence?", [
+    ["Performance and cash flow", ["finance"]],
+    ["Compliance and accountability", ["accounting", "tax", "public"]],
+    ["Growth, strategy and transformation", ["consulting", "entrepreneurship"]],
+    ["Data, automation and dashboards", ["digital"]]
+  ]),
+  question("What kind of learning would you start this month?", [
+    ["Excel, forecasting and Power BI", ["finance", "digital"]],
+    ["IFRS, audit, tax or controls", ["accounting", "tax"]],
+    ["Valuation, credit and investment research", ["markets"]],
+    ["Policy, ESG, development finance or strategy", ["economics", "impact", "consulting"]]
+  ])
+];
+
+function question(text, options) {
+  return { text, options };
+}
+
+function shuffle(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function buildAssessment(type, role = null) {
+  if (type === "role") {
+    return Array.from({ length: 14 }, (_, index) => ({
+      text: `Scenario ${index + 1}: You are working on a ${role.name} project and the evidence is incomplete. What is your strongest instinct?`,
+      options: [
+        ["Structure the issue, test the evidence and recommend action", 3],
+        ["Ask stakeholders for context, then analyse", 2],
+        ["Wait for a perfect template before moving", 1],
+        ["Avoid the uncertain parts", 0]
+      ]
+    }));
+  }
+  let pool = [];
+  for (let i = 0; i < 5; i += 1) pool = pool.concat(streamQuestions);
+  if (type === "career") {
+    roles.slice(0, 24).forEach((role) => {
+      pool.push(question(`A project needs ${role.name.toLowerCase()} judgement. What attracts you most?`, [
+        ["The analysis and decision impact", [role.stream]],
+        ["The stakeholder conversation", ["consulting", "finance"]],
+        ["The controls and risk angle", ["accounting", "tax"]],
+        ["The digital or research angle", ["digital", "economics"]]
+      ]));
+    });
+  }
+  return pool;
+}
+
+function startAssessment(type) {
+  const count = type === "stream" ? 15 : 20;
+  const questions = shuffle(buildAssessment(type)).slice(0, count);
+  renderAssessment(type, questions, null, $("#assessmentRunner"));
+}
+
+function startRoleAssessment(id) {
+  const role = roles.find((item) => item.id === id);
+  const target = $("#roleAssessmentSlot");
+  const questions = shuffle(buildAssessment("role", role)).slice(0, 10);
+  target.innerHTML = `<div class="assessment-runner" id="inlineAssessment"></div>`;
+  renderAssessment("role", questions, role, $("#inlineAssessment"));
+}
+
+function renderAssessment(type, questions, role, target) {
+  const title = type === "stream" ? "Stream-Fit Assessment" : type === "career" ? "Career-Fit Assessment" : `${role.name} Fit Assessment`;
+  target.innerHTML = `
+    <h3>${title}</h3>
+    <div class="progress">
+      <div class="progress-label"><span>Progress</span><span id="progressText">0/${questions.length}</span></div>
+      <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+    </div>
+    <form id="assessmentForm">
+      ${questions.map((item, index) => `
+        <div class="question">
+          <h4>${index + 1}. ${item.text}</h4>
+          <div class="answers">
+            ${item.options.map((option, optionIndex) => `
+              <label class="answer">
+                <input required type="radio" name="q${index}" value="${optionIndex}" data-map='${JSON.stringify(option[1])}'>
+                <span>${option[0]}</span>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      `).join("")}
+      <button class="btn primary" type="submit">Show my result</button>
+      <button class="btn subtle" type="button" onclick="window.print()">Print result</button>
+    </form>
+    <div id="assessmentResult"></div>
+  `;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  $("#assessmentForm").addEventListener("change", () => {
+    const answered = $$("#assessmentForm input:checked").length;
+    $("#progressText").textContent = `${answered}/${questions.length}`;
+    $("#progressFill").style.width = `${(answered / questions.length) * 100}%`;
+  });
+  $("#assessmentForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    scoreAssessment(type, role);
+  });
+}
+
+function scoreAssessment(type, role) {
+  if (type === "role") {
+    const values = $$("#assessmentForm input:checked").map((input) => Number(JSON.parse(input.dataset.map)));
+    const percent = Math.round(values.reduce((sum, value) => sum + value, 0) / (values.length * 3) * 100);
+    $("#assessmentResult").innerHTML = `
+      <article class="result-card">
+        <h3>${percent >= 75 ? "Strong fit" : percent >= 55 ? "Promising fit" : "Exploratory fit"}: ${percent}%</h3>
+        <p>Your answers suggest ${role.name} is ${percent >= 55 ? "worth actively exploring" : "best explored through a small practice project first"}.</p>
+        <p><strong>Skills to build:</strong> ${role.skills.slice(0, 3).join(", ")}.</p>
+        <p><strong>Portfolio project:</strong> ${role.projects[0]}.</p>
+      </article>
+    `;
+    return;
+  }
+
+  const scores = Object.fromEntries(streams.map((stream) => [stream.id, 0]));
+  $$("#assessmentForm input:checked").forEach((input) => {
+    JSON.parse(input.dataset.map).forEach((id, index) => {
+      scores[id] = (scores[id] || 0) + (3 - index);
+    });
+  });
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const topStreams = ranked.slice(0, 3).map(([id]) => streams.find((stream) => stream.id === id));
+  const topRoles = roles.filter((role) => topStreams.map((stream) => stream.id).includes(role.stream)).slice(0, 6);
+
+  $("#assessmentResult").innerHTML = `
+    <article class="result-card">
+      <h3>Best match: ${topStreams[0].name}</h3>
+      <p>${topStreams[0].fit}</p>
+      ${ranked.slice(0, 6).map(([id, value]) => {
+        const stream = streams.find((item) => item.id === id);
+        const width = Math.round(value / ranked[0][1] * 100);
+        return `<div class="bar-row"><strong>${stream.name}</strong><div class="bar"><span style="width:${width}%"></span></div><span>${value}</span></div>`;
+      }).join("")}
+      <h3>Suggested roles</h3>
+      <p>${topRoles.map((item) => item.name).join(", ")}</p>
+      <h3>6-month plan</h3>
+      <p>Choose two roles, build one portfolio project, improve Excel or Power BI, speak to three professionals, and prepare an interview story around evidence-based decision-making.</p>
+    </article>
+  `;
+  storage.set("ccn-last-assessment", { date: new Date().toISOString(), top: topStreams[0].name });
+}
+
+window.filterStream = filterStream;
+window.openRole = openRole;
+window.toggleBookmark = toggleBookmark;
+window.startRoleAssessment = startRoleAssessment;
+window.answerAssistant = answerAssistant;
+
+document.addEventListener("DOMContentLoaded", init);
