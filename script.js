@@ -181,6 +181,8 @@ function bindEvents() {
   $("#showBookmarks").addEventListener("click", () => renderRoles(true));
   $("#pivotForm").addEventListener("submit", handlePivot);
   $("#restartAssistant").addEventListener("click", () => renderAssistant(true));
+  $("#backAssistant").addEventListener("click", goBackAssistant);
+  $("#clearAssistant").addEventListener("click", clearAssistantAnswer);
   $("#floatingHelp").addEventListener("click", () => {
     window.location.hash = "assistance";
     renderAssistant(true);
@@ -466,8 +468,10 @@ function renderAssistant(reset = false) {
   if (reset) assistantState = { step: 0, answers: [] };
   const transcript = $("#assistantTranscript");
   const options = $("#assistantOptions");
+  const backButton = $("#backAssistant");
+  const clearButton = $("#clearAssistant");
 
-  transcript.innerHTML = `<div class="bubble bot">Let us help you find your ideal career. I’ll ask a few simple questions and suggest where to start.</div>`;
+  transcript.innerHTML = `<div class="bubble bot">Let us help you find your ideal career direction. I’ll ask a few simple questions and suggest streams and roles to explore first.</div>`;
   assistantState.answers.forEach((answer) => {
     transcript.innerHTML += `<div class="bubble user">${answer.label}</div><div class="bubble bot">${answer.response}</div>`;
   });
@@ -480,11 +484,15 @@ function renderAssistant(reset = false) {
     const stream = streams.find((item) => item.id === best);
     transcript.innerHTML += `<div class="bubble bot"><strong>Suggested starting stream:</strong> ${stream.name}. Your answers suggest that you may enjoy ${stream.fit.toLowerCase()} Start by opening roles such as ${stream.roles.slice(0, 4).join(", ")}. Then take the Stream-Fit Assessment for a deeper result.</div>`;
     options.innerHTML = "";
+    backButton.disabled = assistantState.answers.length === 0;
+    clearButton.disabled = assistantState.answers.length === 0;
     return;
   }
 
   transcript.innerHTML += `<div class="bubble bot">${step.question}</div>`;
   options.innerHTML = step.options.map(([label, stream]) => `<button class="btn subtle" type="button" onclick="answerAssistant('${stream}', '${label.replace(/'/g, "")}')">${label}</button>`).join("");
+  backButton.disabled = assistantState.answers.length === 0;
+  clearButton.disabled = assistantState.answers.length === 0;
 }
 
 function answerAssistant(streamId, label) {
@@ -492,10 +500,21 @@ function answerAssistant(streamId, label) {
   assistantState.answers.push({
     stream: streamId,
     label,
-    response: `That points toward ${stream.name}. This stream rewards people who can connect their preferences to practical business decisions.`
+    response: `That leans toward ${stream.name}. This does not lock you into one path; it simply gives us a useful starting point for your career exploration.`
   });
   assistantState.step += 1;
   renderAssistant();
+}
+
+function goBackAssistant() {
+  if (!assistantState.answers.length) return;
+  assistantState.answers.pop();
+  assistantState.step = Math.max(0, assistantState.step - 1);
+  renderAssistant();
+}
+
+function clearAssistantAnswer() {
+  goBackAssistant();
 }
 
 const streamQuestions = [
@@ -668,5 +687,7 @@ window.openRole = openRole;
 window.toggleBookmark = toggleBookmark;
 window.startRoleAssessment = startRoleAssessment;
 window.answerAssistant = answerAssistant;
+window.goBackAssistant = goBackAssistant;
+window.clearAssistantAnswer = clearAssistantAnswer;
 
 document.addEventListener("DOMContentLoaded", init);

@@ -100,9 +100,9 @@ li { margin: 6px 0; }
 .eyebrow {
   color: var(--gold);
   font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  font-size: .76rem;
+  letter-spacing: .02em;
+  font-size: .88rem;
+  max-width: 720px;
 }
 
 .hero {
@@ -130,6 +130,15 @@ li { margin: 6px 0; }
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
+}
+
+.assistant-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .hero-panel {
@@ -526,6 +535,7 @@ th { color: var(--navy); background: #e8eef7; }
   .toolbar,
   .compare-controls,
   .answers,
+  .assistant-controls,
   .skill-grid,
   .pathway-grid,
   .bridge { grid-template-columns: 1fr; }
