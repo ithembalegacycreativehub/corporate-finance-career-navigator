@@ -467,6 +467,7 @@ th { color: var(--navy); background: #e8eef7; }
   font-weight: 900;
   box-shadow: var(--shadow);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .bookmark.saved { color: #fff; background: var(--emerald); }

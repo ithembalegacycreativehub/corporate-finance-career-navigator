@@ -143,9 +143,34 @@ const roles = streams.flatMap((stream) =>
     tools: ["Excel", "Power BI", "ERP or accounting systems", "Presentation tools", "AI and automation tools"],
     industries: ["JSE-listed companies", "Banks", "Retailers", "Mining houses", "Telecoms", "FMCG", "Logistics", "Manufacturing", "Public sector", "SMEs", "Startups", "NGOs"],
     projects: ["Build a dashboard or model for a real business question", "Write a one-page decision memo", "Prepare an interview story using problem, analysis, recommendation and outcome"],
-    global: stream.global
+    global: stream.global,
+    certifications: certificationFor(name, stream.id)
   }))
 );
+
+function certificationFor(roleName, streamId) {
+  const lower = roleName.toLowerCase();
+  const byStream = {
+    finance: ["FPAC Certification by the Association for Financial Professionals (AFP)", "CIMA or CGMA", "ACCA, SAICA CA(SA), SAIPA or SAIBA/BAP(SA)", "CFA Program for valuation, corporate finance and investment-facing paths"],
+    accounting: ["SAICA CA(SA), SAIPA Professional Accountant (SA), ACCA or CIMA", "IIA South Africa membership or CIA for internal audit", "IRMSA for risk and controls careers", "ACFE for forensic audit and fraud examination"],
+    tax: ["South African Institute of Taxation (SAIT) membership", "Tax practitioner registration where applicable", "SAICA, SAIPA, ACCA or CIMA tax pathways", "Transfer pricing and international tax short courses"],
+    economics: ["Economic Society of South Africa involvement", "Postgraduate economics, econometrics, policy or development studies", "Data analysis, research methods and policy writing certificates"],
+    markets: ["CFA Program", "Financial modelling and valuation certificates", "Credit analysis training", "SAIFM or relevant market/regulatory exams where applicable"],
+    impact: ["ESG, sustainable finance or climate finance certificates", "Project finance and PPP training", "Impact measurement and management training", "Development finance or public policy postgraduate study"],
+    consulting: ["Project management certifications such as CAPM or PMP", "Business analysis certifications such as CBAP or PMI-PBA", "Lean Six Sigma", "Strategy, turnaround or restructuring short courses"],
+    digital: ["Microsoft Power BI certification", "SQL and data analytics certificates", "Automation and AI productivity credentials", "Python or analytics foundations"],
+    entrepreneurship: ["Business incubation, entrepreneurship or small business finance programmes", "Project management and operations courses", "CIMA/CGMA or finance for non-financial managers for leadership paths"],
+    public: ["Public finance management training", "Compliance Institute Southern Africa membership for compliance paths", "IIA, IRMSA or governance short courses", "Public policy, monitoring and evaluation or development studies"]
+  };
+  let certs = [...(byStream[streamId] || [])];
+  if (lower.includes("fp&a")) certs.unshift("FPAC Certification by AFP is especially relevant for FP&A careers");
+  if (lower.includes("tax") || lower.includes("vat")) certs.unshift("SAIT membership and tax practitioner registration are especially relevant");
+  if (lower.includes("auditor")) certs.unshift("IIA South Africa and CIA are relevant for internal audit; SAICA/IRBA routes are relevant for external audit");
+  if (lower.includes("treasury")) certs.unshift("ACT treasury qualifications and CFA Level I can support treasury careers");
+  if (lower.includes("equity") || lower.includes("investment") || lower.includes("portfolio") || lower.includes("asset")) certs.unshift("CFA Program is highly relevant for investment and markets roles");
+  if (lower.includes("esg") || lower.includes("sustainability")) certs.unshift("ESG, sustainable finance and climate finance certificates are highly relevant");
+  return [...new Set(certs)].slice(0, 5);
+}
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -183,9 +208,10 @@ function bindEvents() {
   $("#restartAssistant").addEventListener("click", () => renderAssistant(true));
   $("#backAssistant").addEventListener("click", goBackAssistant);
   $("#clearAssistant").addEventListener("click", clearAssistantAnswer);
-  $("#floatingHelp").addEventListener("click", () => {
-    window.location.hash = "assistance";
-    renderAssistant(true);
+  $("#floatingHelp").addEventListener("click", (event) => {
+    event.preventDefault();
+    renderAssistant(false);
+    $("#assistance").scrollIntoView({ behavior: "smooth", block: "start" });
   });
   $$("[data-start-assessment]").forEach((button) => {
     button.addEventListener("click", () => startAssessment(button.dataset.startAssessment));
@@ -304,6 +330,14 @@ function openRole(id) {
       <article class="mini-card"><h3>Tools</h3><ul>${role.tools.map((item) => `<li>${item}</li>`).join("")}</ul></article>
       <article class="mini-card"><h3>Industries</h3><ul>${role.industries.slice(0, 8).map((item) => `<li>${item}</li>`).join("")}</ul></article>
       <article class="mini-card"><h3>How to prepare</h3><ul>${role.projects.map((item) => `<li>${item}</li>`).join("")}</ul></article>
+    </div>
+
+    <div class="role-section">
+      <h3>Certifications, memberships and professional bodies to know</h3>
+      <article class="mini-card">
+        <p>These are not always mandatory, but they can strengthen credibility, signal commitment and help you understand the professional community around the role.</p>
+        <ul>${role.certifications.map((item) => `<li>${item}</li>`).join("")}</ul>
+      </article>
     </div>
 
     <div class="role-section">
@@ -524,29 +558,89 @@ const streamQuestions = [
     ["Speak to operational teams to understand what happened", ["consulting", "entrepreneurship"]],
     ["Consider wider economic and policy conditions", ["economics", "public"]]
   ]),
-  question("Which business problem sounds most interesting?", [
-    ["Improving profitability", ["finance", "entrepreneurship"]],
-    ["Strengthening controls and trust", ["accounting", "tax"]],
-    ["Evaluating investments and funding", ["markets", "impact"]],
-    ["Using data to improve decisions", ["digital", "consulting"]]
+  question("A small business has sales but weak cash flow. Where would you focus?", [
+    ["Forecast cash receipts, supplier payments and working capital", ["finance", "entrepreneurship"]],
+    ["Check bookkeeping, reconciliations and tax compliance", ["accounting", "tax"]],
+    ["Build a dashboard to see customer and product patterns", ["digital", "consulting"]],
+    ["Look for grant, DFI or impact funding options", ["impact", "public"]]
   ]),
-  question("Which environment would suit you best?", [
-    ["A corporate finance team", ["finance"]],
-    ["An audit, tax or governance team", ["accounting", "tax"]],
-    ["A bank, fund or investment team", ["markets"]],
-    ["A development, NGO or public programme", ["impact", "public"]]
+  question("A bank is deciding whether to fund a growing company. What interests you?", [
+    ["Credit risk and repayment capacity", ["markets", "finance"]],
+    ["Financial statement quality and assurance", ["accounting"]],
+    ["The development impact of supporting the business", ["impact"]],
+    ["Market and sector research", ["economics", "consulting"]]
   ]),
-  question("What do you want your work to influence?", [
-    ["Performance and cash flow", ["finance"]],
-    ["Compliance and accountability", ["accounting", "tax", "public"]],
-    ["Growth, strategy and transformation", ["consulting", "entrepreneurship"]],
-    ["Data, automation and dashboards", ["digital"]]
+  question("A municipality is struggling with budget control. What would you want to improve?", [
+    ["Public finance reporting and accountability", ["public", "accounting"]],
+    ["Revenue collection and cash forecasting", ["finance", "tax"]],
+    ["Service delivery performance dashboards", ["digital", "consulting"]],
+    ["Policy design and economic impact", ["economics", "impact"]]
   ]),
-  question("What kind of learning would you start this month?", [
-    ["Excel, forecasting and Power BI", ["finance", "digital"]],
-    ["IFRS, audit, tax or controls", ["accounting", "tax"]],
-    ["Valuation, credit and investment research", ["markets"]],
-    ["Policy, ESG, development finance or strategy", ["economics", "impact", "consulting"]]
+  question("A mining house is considering a major capital project. Which part would you enjoy?", [
+    ["Financial modelling and return analysis", ["finance", "markets"]],
+    ["ESG, sustainability and community impact", ["impact", "public"]],
+    ["Controls, procurement risk and governance", ["accounting", "tax"]],
+    ["Strategy, operations and transformation", ["consulting", "entrepreneurship"]]
+  ]),
+  question("Which type of evidence do you trust most when making a recommendation?", [
+    ["Financial models and performance data", ["finance", "markets"]],
+    ["Audited records and documented controls", ["accounting", "tax"]],
+    ["Research, policy evidence and economic indicators", ["economics", "public"]],
+    ["Customer, system and dashboard data", ["digital", "consulting"]]
+  ]),
+  question("Which work rhythm sounds most sustainable to you?", [
+    ["Monthly planning, forecasting and management reporting", ["finance"]],
+    ["Compliance cycles, deadlines and technical review", ["accounting", "tax"]],
+    ["Project-based problem solving with different clients", ["consulting"]],
+    ["Building products, operations or businesses", ["entrepreneurship", "digital"]]
+  ]),
+  question("Which stakeholder group would you prefer to work with?", [
+    ["CFOs, business managers and operations teams", ["finance"]],
+    ["Auditors, SARS, regulators and governance teams", ["accounting", "tax", "public"]],
+    ["Investors, bankers and fund managers", ["markets"]],
+    ["Founders, communities, NGOs and public institutions", ["impact", "entrepreneurship"]]
+  ]),
+  question("What kind of problem gives you energy?", [
+    ["Improving profit, cash and business performance", ["finance", "entrepreneurship"]],
+    ["Finding errors, risks or compliance gaps", ["accounting", "tax"]],
+    ["Understanding economic, market or policy change", ["economics", "public"]],
+    ["Turning data into practical tools and dashboards", ["digital", "consulting"]]
+  ]),
+  question("Which future skill are you most willing to build?", [
+    ["FP&A, modelling and business partnering", ["finance"]],
+    ["Tax, audit, controls and governance", ["accounting", "tax"]],
+    ["Investment analysis, credit and valuation", ["markets"]],
+    ["Power BI, SQL, automation and AI tools", ["digital"]]
+  ]),
+  question("If a senior person challenged your recommendation, you would rather defend it with:", [
+    ["Scenario analysis and commercial logic", ["finance", "consulting"]],
+    ["Standards, regulations and documented evidence", ["accounting", "tax", "public"]],
+    ["Market data and investment thesis", ["markets"]],
+    ["Impact logic and stakeholder outcomes", ["impact", "economics"]]
+  ]),
+  question("Which portfolio project would you actually finish?", [
+    ["A budget, forecast or profitability model", ["finance"]],
+    ["A tax, audit or controls review checklist", ["accounting", "tax"]],
+    ["A stock pitch, credit memo or investment note", ["markets"]],
+    ["A Power BI dashboard or automation workflow", ["digital", "consulting"]]
+  ]),
+  question("What motivates you most in a career?", [
+    ["Commercial influence and decision support", ["finance", "consulting"]],
+    ["Professional credibility and trusted expertise", ["accounting", "tax"]],
+    ["Investment judgement and market understanding", ["markets", "economics"]],
+    ["Social impact, development and public value", ["impact", "public"]]
+  ]),
+  question("A company wants to expand into another African market. What would you explore first?", [
+    ["Financial feasibility and capital requirements", ["finance", "markets"]],
+    ["Tax, regulation and compliance risk", ["tax", "accounting"]],
+    ["Market size, competition and operating model", ["consulting", "economics"]],
+    ["Digital channels, data and customer analytics", ["digital", "entrepreneurship"]]
+  ]),
+  question("Which sentence sounds most like you?", [
+    ["I want to help leaders make better financial decisions", ["finance"]],
+    ["I want to make information reliable and compliant", ["accounting", "tax"]],
+    ["I want to understand markets, capital and investment", ["markets", "economics"]],
+    ["I want to build, improve or transform systems", ["digital", "consulting", "entrepreneurship"]]
   ])
 ];
 
@@ -560,18 +654,23 @@ function shuffle(items) {
 
 function buildAssessment(type, role = null) {
   if (type === "role") {
-    return Array.from({ length: 14 }, (_, index) => ({
-      text: `Scenario ${index + 1}: You are working on a ${role.name} project and the evidence is incomplete. What is your strongest instinct?`,
-      options: [
-        ["Structure the issue, test the evidence and recommend action", 3],
-        ["Ask stakeholders for context, then analyse", 2],
-        ["Wait for a perfect template before moving", 1],
-        ["Avoid the uncertain parts", 0]
-      ]
-    }));
+    return [
+      roleQuestion(`You are asked to support a ${role.name} decision with incomplete information. What would you do first?`, ["Structure the issue, test the evidence and recommend action", 3], ["Ask stakeholders for context, then analyse", 2], ["Wait for a perfect template before moving", 1], ["Avoid the uncertain parts", 0]),
+      roleQuestion("A senior stakeholder questions your numbers. How do you respond?", ["Show assumptions, explain the logic and adjust where evidence supports it", 3], ["Ask for time to check and return with a clearer answer", 2], ["Defend the work without checking", 1], ["Avoid presenting next time", 0]),
+      roleQuestion("Which part of this role sounds most energising?", [`Using ${role.skills[0].toLowerCase()} to influence a real decision`, 3], ["Learning technical tools and applying them carefully", 2], ["Having a respected title", 1], ["I am not sure what the role does", 0]),
+      roleQuestion("You receive messy data before a deadline. What is your instinct?", ["Clean the data, identify limitations and still produce a useful recommendation", 3], ["Ask for context and prioritise the most important drivers", 2], ["Wait for someone else to fix the dataset", 1], ["Avoid the task because it feels risky", 0]),
+      roleQuestion("How comfortable are you with explaining analysis to non-specialists?", ["Very comfortable; I enjoy translating analysis into decisions", 3], ["Comfortable if I have time to prepare", 2], ["I prefer sending the spreadsheet only", 1], ["I avoid stakeholder conversations", 0]),
+      roleQuestion("What would you build to prepare for this role?", [role.projects[0], 3], [role.projects[1], 2], ["A generic CV with no evidence", 1], ["Nothing until I get hired", 0]),
+      roleQuestion("Which professional development option would you take seriously?", [role.certifications[0] || "A relevant professional certification", 3], [role.certifications[1] || "A short course in the field", 2], ["Only free videos with no practice", 1], ["No further learning", 0]),
+      roleQuestion("What type of pressure can you handle best?", ["A deadline where judgement and evidence both matter", 3], ["A technical task with clear review points", 2], ["Only tasks with no ambiguity", 1], ["I prefer work with no accountability", 0]),
+      roleQuestion("How do you think AI will affect this role?", ["It will automate routine work and make judgement more important", 3], ["It will help with drafts, checks and research", 2], ["It will do everything, so skills matter less", 1], ["I do not need to think about it", 0]),
+      roleQuestion("Which interview story would make you strongest?", ["A story where I used evidence to improve a decision", 3], ["A story where I learned a technical skill quickly", 2], ["A story only about being interested", 1], ["I do not have or plan to build a story", 0]),
+      roleQuestion("When work becomes detailed, you usually:", ["Use checklists and review points to protect quality", 3], ["Slow down and ask for feedback", 2], ["Rush and hope small errors are not noticed", 1], ["Avoid detail-heavy work completely", 0]),
+      roleQuestion("If this role became more strategic over time, you would:", ["Welcome the chance to influence bigger decisions", 3], ["Need coaching but would be interested", 2], ["Prefer to stay only with routine tasks", 1], ["Dislike the extra responsibility", 0])
+    ];
   }
   let pool = [];
-  for (let i = 0; i < 5; i += 1) pool = pool.concat(streamQuestions);
+  pool = pool.concat(streamQuestions);
   if (type === "career") {
     roles.slice(0, 24).forEach((role) => {
       pool.push(question(`A project needs ${role.name.toLowerCase()} judgement. What attracts you most?`, [
@@ -583,6 +682,10 @@ function buildAssessment(type, role = null) {
     });
   }
   return pool;
+}
+
+function roleQuestion(text, ...options) {
+  return { text, options };
 }
 
 function startAssessment(type) {
