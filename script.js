@@ -213,12 +213,25 @@ function bindEvents() {
     renderAssistant(false);
     $("#assistance").scrollIntoView({ behavior: "smooth", block: "start" });
   });
+  document.addEventListener("click", handleDelegatedClick);
   $$("[data-start-assessment]").forEach((button) => {
     button.addEventListener("click", () => startAssessment(button.dataset.startAssessment));
   });
   ["compareOne", "compareTwo", "compareThree"].forEach((id) => {
     $(`#${id}`).addEventListener("change", renderCompare);
   });
+}
+
+function handleDelegatedClick(event) {
+  const action = event.target.closest("[data-action]");
+  if (!action) return;
+  const type = action.dataset.action;
+  if (type === "open-role") openRole(action.dataset.role);
+  if (type === "toggle-bookmark") toggleBookmark(action.dataset.role);
+  if (type === "filter-stream") filterStream(action.dataset.stream);
+  if (type === "role-assessment") startRoleAssessment(action.dataset.role);
+  if (type === "assistant-answer") answerAssistant(action.dataset.option);
+  if (type === "print") window.print();
 }
 
 function renderStreams() {
@@ -230,7 +243,7 @@ function renderStreams() {
         <p>${stream.fit}</p>
         <p><strong>South Africa:</strong> ${stream.sa}</p>
       </div>
-      <button class="btn subtle" type="button" onclick="filterStream('${stream.id}')">Explore this stream</button>
+      <button class="btn subtle" type="button" data-action="filter-stream" data-stream="${stream.id}">Explore this stream</button>
     </article>
   `).join("");
 }
@@ -271,8 +284,8 @@ function renderRoles(bookmarksOnly = false) {
         <p><strong>Stream:</strong> ${role.streamName}</p>
       </div>
       <div class="role-actions">
-        <button class="btn subtle" type="button" onclick="openRole('${role.id}')">Open role guide</button>
-        <button class="btn subtle bookmark ${saved.includes(role.id) ? "saved" : ""}" type="button" onclick="toggleBookmark('${role.id}')">${saved.includes(role.id) ? "Saved" : "Save"}</button>
+        <button class="btn subtle" type="button" data-action="open-role" data-role="${role.id}">Open role guide</button>
+        <button class="btn subtle bookmark ${saved.includes(role.id) ? "saved" : ""}" type="button" data-action="toggle-bookmark" data-role="${role.id}">${saved.includes(role.id) ? "Saved" : "Save"}</button>
       </div>
     </article>
   `).join("") || `<div class="empty-state"><h3>No roles found</h3><p>Try another stream or search term.</p></div>`;
@@ -299,8 +312,8 @@ function openRole(id) {
       <p>${role.overview}</p>
       <p><strong>Why it matters:</strong> ${role.why}</p>
       <div class="role-actions">
-        <button class="btn primary" type="button" onclick="startRoleAssessment('${role.id}')">Take role assessment</button>
-        <button class="btn secondary-dark" type="button" onclick="window.print()">Print summary</button>
+        <button class="btn primary" type="button" data-action="role-assessment" data-role="${role.id}">Take role assessment</button>
+        <button class="btn secondary-dark" type="button" data-action="print">Print summary</button>
       </div>
     </div>
 
@@ -465,41 +478,66 @@ function handlePivot(event) {
 
 const assistantSteps = [
   {
+    dimension: "Energy pattern",
     question: "What type of work gives you energy?",
     options: [
-      ["Numbers and decisions", "finance"],
-      ["Rules, detail and trust", "accounting"],
-      ["People and advice", "consulting"],
-      ["Impact and development", "impact"],
-      ["Systems and data", "digital"]
+      { label: "Turning numbers into business decisions", scores: { finance: 4, markets: 2, digital: 1 } },
+      { label: "Making information reliable, compliant and trusted", scores: { accounting: 4, tax: 3, public: 1 } },
+      { label: "Advising people through messy business problems", scores: { consulting: 4, entrepreneurship: 2, finance: 1 } },
+      { label: "Solving development, public value or sustainability problems", scores: { impact: 4, public: 3, economics: 1 } },
+      { label: "Building dashboards, systems and digital tools", scores: { digital: 4, finance: 1, consulting: 1 } }
     ]
   },
   {
-    question: "Do you prefer structured problems or unclear business problems?",
+    dimension: "Problem style",
+    question: "Which problem type feels most natural?",
     options: [
-      ["Structured problems", "accounting"],
-      ["Commercial problems", "finance"],
-      ["Unclear strategic problems", "consulting"],
-      ["Research-heavy questions", "economics"],
-      ["Build-and-lead problems", "entrepreneurship"]
+      { label: "Structured problems with standards, evidence and review", scores: { accounting: 4, tax: 3 } },
+      { label: "Commercial problems involving profit, cash and performance", scores: { finance: 4, entrepreneurship: 2 } },
+      { label: "Unclear strategic problems where the answer is not obvious", scores: { consulting: 4, economics: 2 } },
+      { label: "Capital, credit, valuation or investment problems", scores: { markets: 4, finance: 2 } },
+      { label: "Policy, governance and service-delivery problems", scores: { public: 4, impact: 2 } }
     ]
   },
   {
-    question: "Where do you imagine yourself working?",
+    dimension: "Preferred environment",
+    question: "Where do you imagine yourself doing meaningful work?",
     options: [
-      ["Corporate", "finance"],
-      ["Banking or investments", "markets"],
-      ["Public sector", "public"],
-      ["Consulting", "consulting"],
-      ["Startup or SME", "entrepreneurship"]
+      { label: "A company finance or performance team", scores: { finance: 4, digital: 1 } },
+      { label: "An audit, tax, risk or governance environment", scores: { accounting: 3, tax: 3, public: 1 } },
+      { label: "A bank, investment firm or fund", scores: { markets: 4, finance: 1 } },
+      { label: "A consulting, advisory or transformation team", scores: { consulting: 4, digital: 1 } },
+      { label: "A startup, SME, DFI, NGO or public institution", scores: { entrepreneurship: 2, impact: 3, public: 2 } }
+    ]
+  },
+  {
+    dimension: "Work preference",
+    question: "Which daily activity would you rather do?",
+    options: [
+      { label: "Build a forecast, budget or profitability analysis", scores: { finance: 4 } },
+      { label: "Review tax, audit evidence or compliance risks", scores: { tax: 3, accounting: 3 } },
+      { label: "Research markets, policy or economic trends", scores: { economics: 4, markets: 1 } },
+      { label: "Create a dashboard or automate a manual process", scores: { digital: 4 } },
+      { label: "Facilitate a workshop and recommend a solution", scores: { consulting: 4, entrepreneurship: 1 } }
+    ]
+  },
+  {
+    dimension: "Motivation",
+    question: "What would make you proud after six months of learning?",
+    options: [
+      { label: "A portfolio showing strong financial decision support", scores: { finance: 4, markets: 1 } },
+      { label: "A credible professional path with membership or certification progress", scores: { accounting: 3, tax: 3 } },
+      { label: "A clear role in funding, investment or market analysis", scores: { markets: 4 } },
+      { label: "A project that improves public value, ESG or development outcomes", scores: { impact: 4, public: 2 } },
+      { label: "A practical tool, business idea or transformation case", scores: { digital: 2, entrepreneurship: 3, consulting: 2 } }
     ]
   }
 ];
 
-let assistantState = { step: 0, answers: [] };
+let assistantState = { step: 0, answers: [], scores: {} };
 
 function renderAssistant(reset = false) {
-  if (reset) assistantState = { step: 0, answers: [] };
+  if (reset) assistantState = { step: 0, answers: [], scores: {} };
   const transcript = $("#assistantTranscript");
   const options = $("#assistantOptions");
   const backButton = $("#backAssistant");
@@ -512,37 +550,68 @@ function renderAssistant(reset = false) {
 
   const step = assistantSteps[assistantState.step];
   if (!step) {
-    const counts = {};
-    assistantState.answers.forEach((answer) => counts[answer.stream] = (counts[answer.stream] || 0) + 1);
-    const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] || "finance";
-    const stream = streams.find((item) => item.id === best);
-    transcript.innerHTML += `<div class="bubble bot"><strong>Suggested starting stream:</strong> ${stream.name}. Your answers suggest that you may enjoy ${stream.fit.toLowerCase()} Start by opening roles such as ${stream.roles.slice(0, 4).join(", ")}. Then take the Stream-Fit Assessment for a deeper result.</div>`;
+    transcript.innerHTML += `<div class="bubble bot">${assistantResultHtml()}</div>`;
     options.innerHTML = "";
     backButton.disabled = assistantState.answers.length === 0;
     clearButton.disabled = assistantState.answers.length === 0;
     return;
   }
 
-  transcript.innerHTML += `<div class="bubble bot">${step.question}</div>`;
-  options.innerHTML = step.options.map(([label, stream]) => `<button class="btn subtle" type="button" onclick="answerAssistant('${stream}', '${label.replace(/'/g, "")}')">${label}</button>`).join("");
+  transcript.innerHTML += `<div class="bubble bot"><strong>${step.dimension}</strong><br>${step.question}</div>`;
+  options.innerHTML = step.options.map((option, index) => `<button class="btn subtle" type="button" data-action="assistant-answer" data-option="${index}">${option.label}</button>`).join("");
   backButton.disabled = assistantState.answers.length === 0;
   clearButton.disabled = assistantState.answers.length === 0;
 }
 
-function answerAssistant(streamId, label) {
-  const stream = streams.find((item) => item.id === streamId);
+function answerAssistant(optionIndex) {
+  const step = assistantSteps[assistantState.step];
+  const option = step?.options[Number(optionIndex)];
+  if (!option) return;
+  Object.entries(option.scores).forEach(([streamId, value]) => {
+    assistantState.scores[streamId] = (assistantState.scores[streamId] || 0) + value;
+  });
+  const leading = Object.entries(option.scores).sort((a, b) => b[1] - a[1])[0][0];
+  const stream = streams.find((item) => item.id === leading);
   assistantState.answers.push({
-    stream: streamId,
-    label,
-    response: `That leans toward ${stream.name}. This does not lock you into one path; it simply gives us a useful starting point for your career exploration.`
+    optionIndex: Number(optionIndex),
+    scores: option.scores,
+    label: option.label,
+    response: `That signal leans toward ${stream.name}. It is one data point, not a final decision, and it helps refine the recommendation.`
   });
   assistantState.step += 1;
   renderAssistant();
 }
 
+function assistantResultHtml() {
+  const ranked = Object.entries(assistantState.scores)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id, score]) => ({ stream: streams.find((item) => item.id === id), score }));
+  const best = ranked[0]?.stream || streams[0];
+  const maxScore = ranked[0]?.score || 1;
+  const suggestedRoles = roles.filter((role) => ranked.map((item) => item.stream.id).includes(role.stream)).slice(0, 6);
+  return `
+    <strong>Guidance result: ${best.name}</strong>
+    <p>Your answers point most strongly to this stream, with two adjacent directions to compare. This is a starting map, not a fixed label.</p>
+    ${ranked.map((item) => {
+      const width = Math.round(item.score / maxScore * 100);
+      return `<div class="bar-row"><strong>${item.stream.name}</strong><div class="bar"><span style="width:${width}%"></span></div><span>${item.score}</span></div>`;
+    }).join("")}
+    <p><strong>Why this may fit:</strong> ${best.fit}</p>
+    <p><strong>Roles to open first:</strong> ${suggestedRoles.map((role) => role.name).join(", ")}.</p>
+    <p><strong>Next action:</strong> open two role guides, compare them side by side, then take the Stream-Fit Assessment for a fuller result.</p>
+  `;
+}
+
 function goBackAssistant() {
   if (!assistantState.answers.length) return;
-  assistantState.answers.pop();
+  const removed = assistantState.answers.pop();
+  if (removed?.scores) {
+    Object.entries(removed.scores).forEach(([streamId, value]) => {
+      assistantState.scores[streamId] = Math.max(0, (assistantState.scores[streamId] || 0) - value);
+      if (assistantState.scores[streamId] === 0) delete assistantState.scores[streamId];
+    });
+  }
   assistantState.step = Math.max(0, assistantState.step - 1);
   renderAssistant();
 }
