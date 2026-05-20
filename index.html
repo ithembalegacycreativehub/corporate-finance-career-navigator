@@ -15,6 +15,7 @@
     <button class="menu-toggle" type="button" aria-label="Open navigation">Menu</button>
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="#streams">Streams</a>
+      <a href="#start-here">Start Here</a>
       <a href="#roles">Roles</a>
       <a href="#compare">Compare</a>
       <a href="#pivot">Career Pivot</a>
@@ -52,6 +53,25 @@
           <strong>Guided</strong>
           <span>Rule-based support</span>
         </article>
+      </div>
+    </section>
+
+    <section id="start-here" class="section-block">
+      <div class="section-head">
+        <p class="eyebrow">Start here</p>
+        <h2>Choose the journey that sounds most like you.</h2>
+        <p>This gives you a recommended route through the platform so the website feels less overwhelming.</p>
+      </div>
+      <div class="journey-grid">
+        <button class="journey-card" type="button" data-journey="student"><strong>I am a student</strong><span>Explore streams, build foundations and choose portfolio projects.</span></button>
+        <button class="journey-card" type="button" data-journey="graduate"><strong>I am a graduate</strong><span>Identify entry roles, readiness gaps and interview stories.</span></button>
+        <button class="journey-card" type="button" data-journey="changer"><strong>I want to pivot</strong><span>Use your current experience to build a realistic bridge.</span></button>
+        <button class="journey-card" type="button" data-journey="jobseeker"><strong>I need work direction</strong><span>Find safer entry points and practical 6-month actions.</span></button>
+        <button class="journey-card" type="button" data-journey="entrepreneur"><strong>I want to build a business</strong><span>Focus on commercial, finance, operations and leadership paths.</span></button>
+      </div>
+      <div id="journeyResult" class="result-card journey-result">
+        <h3>Your suggested journey will appear here.</h3>
+        <p>Select one of the options above.</p>
       </div>
     </section>
 
@@ -226,6 +246,64 @@
       <div id="assessmentRunner" class="assessment-runner"></div>
     </section>
 
+    <section id="readiness" class="section-block">
+      <div class="section-head">
+        <p class="eyebrow">Career readiness score</p>
+        <h2>Check how ready you are to pursue a commerce role.</h2>
+        <p>This quick score looks at technical, commercial, communication, digital, certification and portfolio readiness.</p>
+      </div>
+      <form id="readinessForm" class="form-card readiness-form">
+        <div class="form-grid">
+          <label>Technical confidence
+            <select name="technical"><option value="1">Beginner</option><option value="2">Developing</option><option value="3">Confident</option><option value="4">Strong</option></select>
+          </label>
+          <label>Commercial awareness
+            <select name="commercial"><option value="1">Beginner</option><option value="2">Developing</option><option value="3">Confident</option><option value="4">Strong</option></select>
+          </label>
+          <label>Communication confidence
+            <select name="communication"><option value="1">Beginner</option><option value="2">Developing</option><option value="3">Confident</option><option value="4">Strong</option></select>
+          </label>
+          <label>Digital tools confidence
+            <select name="digital"><option value="1">Beginner</option><option value="2">Developing</option><option value="3">Confident</option><option value="4">Strong</option></select>
+          </label>
+          <label>Certification direction
+            <select name="certification"><option value="1">Not sure yet</option><option value="2">Researching</option><option value="3">Chosen path</option><option value="4">Already started</option></select>
+          </label>
+          <label>Portfolio evidence
+            <select name="portfolio"><option value="1">None yet</option><option value="2">One draft project</option><option value="3">One complete project</option><option value="4">Multiple projects</option></select>
+          </label>
+        </div>
+        <button class="btn primary" type="submit">Calculate readiness</button>
+      </form>
+      <div id="readinessResult" class="result-card"></div>
+    </section>
+
+    <section id="projects" class="section-block light-section">
+      <div class="section-head">
+        <p class="eyebrow">Portfolio project library</p>
+        <h2>Build evidence before you apply.</h2>
+        <p>Employers trust proof. Use these projects to practise and create interview stories.</p>
+      </div>
+      <div id="projectLibrary" class="project-grid"></div>
+    </section>
+
+    <section id="career-plan" class="section-block">
+      <div class="section-head">
+        <p class="eyebrow">Saved career plan</p>
+        <h2>Create a simple action plan you can print.</h2>
+        <p>Save roles as you explore. This section turns them into a practical plan.</p>
+      </div>
+      <div id="careerPlan" class="result-card"></div>
+    </section>
+
+    <section id="glossary" class="section-block light-section">
+      <div class="section-head">
+        <p class="eyebrow">Commerce glossary</p>
+        <h2>Understand the language of business careers.</h2>
+      </div>
+      <div id="glossaryList" class="glossary-grid"></div>
+    </section>
+
     <section id="future" class="section-block dark-section">
       <div class="section-head">
         <p class="eyebrow">Future of commerce careers</p>
@@ -248,6 +326,6 @@
     <p>No responses are sent to a server. Saved roles and results stay in the user’s browser.</p>
   </footer>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

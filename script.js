@@ -129,6 +129,30 @@ const caseStudies = [
   }
 ];
 
+const portfolioProjects = [
+  ["FP&A dashboard", "Create a 12-month forecast and variance dashboard for a retailer using sample sales, margin and expense data.", "Finance and Corporate Performance"],
+  ["Tax compliance checklist", "Build a VAT and income tax compliance checklist for a small South African business.", "Taxation and Regulatory"],
+  ["Credit memo", "Write a two-page bank credit memo for an SME seeking working-capital finance.", "Banking and Financial Markets"],
+  ["Valuation note", "Value a listed company using comparable multiples and a simple DCF.", "Investment and Valuations"],
+  ["Policy brief", "Write a short policy brief on unemployment, infrastructure or township economy growth.", "Economics and Public Sector"],
+  ["Power BI dashboard", "Build a dashboard showing sales, customers, stock, margin and regional performance.", "Data and Digital Finance"],
+  ["ESG investment case", "Prepare an ESG or sustainability finance investment case for energy, water or waste reduction.", "Development Finance and Impact"],
+  ["Turnaround plan", "Create a 90-day cash-flow and operational turnaround plan for a struggling SME.", "Consulting and Entrepreneurship"]
+];
+
+const glossaryTerms = [
+  ["FP&A", "Financial Planning and Analysis: budgeting, forecasting, performance insight and decision support."],
+  ["Working capital", "The cash tied up in receivables, inventory and payables. It affects liquidity and survival."],
+  ["DCF", "Discounted Cash Flow: a valuation method based on future cash flows discounted to today's value."],
+  ["IRR", "Internal Rate of Return: a measure used to compare investment returns."],
+  ["VAT", "Value-Added Tax: an indirect tax on goods and services, important in tax compliance."],
+  ["ESG", "Environmental, Social and Governance factors used in investment, reporting and strategy."],
+  ["Audit evidence", "Documents, records and tests used to support an audit conclusion."],
+  ["Transfer pricing", "Pricing of transactions between related companies, important in international tax."],
+  ["Credit risk", "The risk that a borrower cannot repay debt as agreed."],
+  ["Portfolio project", "A practical project that proves skill before formal work experience."]
+];
+
 const roles = streams.flatMap((stream) =>
   stream.roles.map((name, index) => ({
     id: `${stream.id}-${name}`.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
@@ -195,6 +219,9 @@ function init() {
   renderFilters();
   renderRoles();
   renderCompare();
+  renderProjectLibrary();
+  renderGlossary();
+  renderCareerPlan();
   renderAssistant(true);
   bindEvents();
 }
@@ -205,6 +232,7 @@ function bindEvents() {
   $("#streamFilter").addEventListener("change", () => renderRoles());
   $("#showBookmarks").addEventListener("click", () => renderRoles(true));
   $("#pivotForm").addEventListener("submit", handlePivot);
+  $("#readinessForm").addEventListener("submit", handleReadiness);
   $("#restartAssistant").addEventListener("click", () => renderAssistant(true));
   $("#backAssistant").addEventListener("click", goBackAssistant);
   $("#clearAssistant").addEventListener("click", clearAssistantAnswer);
@@ -214,6 +242,7 @@ function bindEvents() {
     $("#assistance").scrollIntoView({ behavior: "smooth", block: "start" });
   });
   document.addEventListener("click", handleDelegatedClick);
+  $$(".journey-card").forEach((card) => card.addEventListener("click", () => renderJourney(card.dataset.journey)));
   $$("[data-start-assessment]").forEach((button) => {
     button.addEventListener("click", () => startAssessment(button.dataset.startAssessment));
   });
@@ -232,6 +261,7 @@ function handleDelegatedClick(event) {
   if (type === "role-assessment") startRoleAssessment(action.dataset.role);
   if (type === "assistant-answer") answerAssistant(action.dataset.option);
   if (type === "print") window.print();
+  if (type === "compare-top") compareRoles((action.dataset.roles || "").split(","));
 }
 
 function renderStreams() {
@@ -246,6 +276,85 @@ function renderStreams() {
       <button class="btn subtle" type="button" data-action="filter-stream" data-stream="${stream.id}">Explore this stream</button>
     </article>
   `).join("");
+}
+
+function renderJourney(type) {
+  const journeys = {
+    student: {
+      title: "Student journey",
+      text: "Start by exploring three streams, then complete the Stream-Fit Assessment. Build one beginner portfolio project before applying for vacation work, internships or society leadership roles.",
+      actions: ["Read Finance, Accounting and Digital streams", "Build a dashboard or decision memo", "Research SAICA, CIMA, ACCA, SAIT, CFA and FPAC early"]
+    },
+    graduate: {
+      title: "Graduate journey",
+      text: "Focus on entry-level roles, readiness gaps and interview evidence. Your goal is to show that you can learn quickly and apply commerce thinking to real decisions.",
+      actions: ["Take the Career-Fit Assessment", "Open your top 3 role guides", "Create one portfolio project and one interview story"]
+    },
+    changer: {
+      title: "Career pivot journey",
+      text: "Use your current experience as evidence. The pivot navigator will identify safer transitions, stretch roles and a practical six-month bridge.",
+      actions: ["Complete the Career Pivot Navigator", "Compare the recommended roles", "Target a bridge role before a stretch role"]
+    },
+    jobseeker: {
+      title: "Work direction journey",
+      text: "Prioritise realistic entry points, visible projects and clear applications. You do not need to know everything before starting.",
+      actions: ["Use I Need Assistance", "Choose one safer role and one stretch role", "Build a small project you can show"]
+    },
+    entrepreneur: {
+      title: "Entrepreneurial journey",
+      text: "Focus on commercial finance, operations, cash flow, pricing and business development. These skills help you build or manage a business.",
+      actions: ["Explore Entrepreneurship, Finance and Digital streams", "Build a cash-flow rescue project", "Learn pricing, working capital and dashboard basics"]
+    }
+  };
+  const item = journeys[type];
+  $("#journeyResult").innerHTML = `
+    <h3>${item.title}</h3>
+    <p>${item.text}</p>
+    <ul>${item.actions.map((action) => `<li>${action}</li>`).join("")}</ul>
+  `;
+  $("#journeyResult").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function renderProjectLibrary() {
+  $("#projectLibrary").innerHTML = portfolioProjects.map(([title, text, stream]) => `
+    <article class="project-card">
+      <span class="tag">${stream}</span>
+      <h3>${title}</h3>
+      <p>${text}</p>
+      <p><strong>Interview story:</strong> Explain the problem, data used, recommendation and what you learned.</p>
+    </article>
+  `).join("");
+}
+
+function renderGlossary() {
+  $("#glossaryList").innerHTML = glossaryTerms.map(([term, definition]) => `
+    <article class="glossary-card">
+      <h3>${term}</h3>
+      <p>${definition}</p>
+    </article>
+  `).join("");
+}
+
+function renderCareerPlan() {
+  const saved = storage.get("ccn-bookmarks", []);
+  const savedRoles = saved.map((id) => roles.find((role) => role.id === id)).filter(Boolean);
+  if (!savedRoles.length) {
+    $("#careerPlan").innerHTML = `<h3>No saved roles yet.</h3><p>Save roles while exploring, then return here for a simple action plan.</p>`;
+    return;
+  }
+  $("#careerPlan").innerHTML = `
+    <h3>Your saved career plan</h3>
+    <p><strong>Saved roles:</strong> ${savedRoles.map((role) => role.name).join(", ")}.</p>
+    <h3>Recommended next steps</h3>
+    <ul>
+      <li>Compare your top three saved roles.</li>
+      <li>Choose one portfolio project linked to the strongest role.</li>
+      <li>Research the relevant certifications or professional memberships.</li>
+      <li>Prepare one interview story for each saved role.</li>
+    </ul>
+    <button class="btn subtle" type="button" data-action="compare-top" data-roles="${savedRoles.slice(0, 3).map((role) => role.id).join(",")}">Compare saved roles</button>
+    <button class="btn subtle" type="button" data-action="print">Print career plan</button>
+  `;
 }
 
 function renderFilters() {
@@ -296,6 +405,41 @@ function toggleBookmark(id) {
   saved = saved.includes(id) ? saved.filter((item) => item !== id) : [...saved, id];
   storage.set("ccn-bookmarks", saved);
   renderRoles();
+  renderCareerPlan();
+}
+
+function compareRoles(roleIds) {
+  const clean = roleIds.filter(Boolean);
+  if (!clean.length) return;
+  ["compareOne", "compareTwo", "compareThree"].forEach((selectId, index) => {
+    if (clean[index]) $(`#${selectId}`).value = clean[index];
+  });
+  renderCompare();
+  $("#compare").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function handleReadiness(event) {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const dimensions = ["technical", "commercial", "communication", "digital", "certification", "portfolio"];
+  const total = dimensions.reduce((sum, key) => sum + Number(form.get(key)), 0);
+  const percent = Math.round(total / (dimensions.length * 4) * 100);
+  const weak = dimensions.filter((key) => Number(form.get(key)) <= 2);
+  const labels = {
+    technical: "technical confidence",
+    commercial: "commercial awareness",
+    communication: "communication confidence",
+    digital: "digital tools",
+    certification: "certification direction",
+    portfolio: "portfolio evidence"
+  };
+  $("#readinessResult").innerHTML = `
+    <h3>Your readiness score: ${percent}%</h3>
+    <div class="readiness-meter"><span style="width:${percent}%"></span></div>
+    <p>${percent >= 75 ? "You have a strong starting base. Focus on targeted applications and sharper evidence." : percent >= 50 ? "You are developing well. Your next step is to turn learning into proof." : "You are early in the journey. That is fine. Start with foundations and one small project."}</p>
+    <p><strong>Priority areas:</strong> ${weak.length ? weak.map((key) => labels[key]).join(", ") : "keep deepening all areas"}.</p>
+    <p><strong>Next action:</strong> choose one role, one certification or membership to research, and one portfolio project to complete in the next 30 days.</p>
+  `;
 }
 
 function openRole(id) {
@@ -835,6 +979,7 @@ function scoreAssessment(type, role) {
   const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const topStreams = ranked.slice(0, 3).map(([id]) => streams.find((stream) => stream.id === id));
   const topRoles = roles.filter((role) => topStreams.map((stream) => stream.id).includes(role.stream)).slice(0, 6);
+  const compareIds = topRoles.slice(0, 3).map((role) => role.id).join(",");
 
   $("#assessmentResult").innerHTML = `
     <article class="result-card">
@@ -847,6 +992,7 @@ function scoreAssessment(type, role) {
       }).join("")}
       <h3>Suggested roles</h3>
       <p>${topRoles.map((item) => item.name).join(", ")}</p>
+      <button class="btn subtle" type="button" data-action="compare-top" data-roles="${compareIds}">Compare my top 3 roles</button>
       <h3>6-month plan</h3>
       <p>Choose two roles, build one portfolio project, improve Excel or Power BI, speak to three professionals, and prepare an interview story around evidence-based decision-making.</p>
     </article>
